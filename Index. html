@@ -3,285 +3,299 @@
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#091638">
-<title>GAME DARBAR</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10102b">
+<title>GAME KINGDOM</title>
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;
  font-family:Arial,sans-serif;
  color:white;
- background:linear-gradient(145deg,#07132e,#142c62,#080f27);
+ background:radial-gradient(circle at top,#333c83,#10102b 65%,#080817);
  min-height:100vh;
 }
 header{
+ padding:25px 15px;
  text-align:center;
- padding:25px 12px;
- background:linear-gradient(135deg,#07132e,#183d7c);
- border-bottom:2px solid #e9bd55;
+ background:linear-gradient(135deg,#171746,#44218b);
+ border-bottom:2px solid #f8c94b;
 }
-.logo{font-size:48px}
-h1{margin:5px;color:#ffd76a;font-size:32px}
-header p{margin:7px;color:#dce6ff}
-.container{max-width:850px;margin:auto;padding:15px}
-.welcome{
- background:linear-gradient(120deg,#173d79,#101c42);
- border:1px solid #d9ad48;
- border-radius:18px;
- padding:18px;
- text-align:center;
- margin-bottom:20px;
+.logo{font-size:42px}
+h1{margin:8px 0;color:#ffd65a;font-size:30px}
+header p{color:#d4d4f5;margin:5px}
+.stats{
+ display:flex;justify-content:center;gap:12px;
+ margin:15px;flex-wrap:wrap;
 }
-.welcome h2{color:#ffdb76;margin:5px}
-.section-title{color:#ffd76a;margin:22px 5px 12px}
-.games{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
+.stat{
+ background:#252552;padding:12px 20px;
+ border-radius:12px;border:1px solid #5757a0;
+}
+.stat b{color:#ffd65a}
+.container{padding:12px;max-width:750px;margin:auto}
+h2{color:#ffd65a;font-size:20px}
+.grid{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
 }
 .game{
- background:linear-gradient(145deg,#1c3970,#101b3c);
- border:1px solid #b78e39;
- border-radius:16px;
- padding:18px 8px;
- text-align:center;
- cursor:pointer;
+ background:linear-gradient(145deg,#29295d,#171735);
+ border:1px solid #55558d;border-radius:17px;
+ padding:18px 8px;text-align:center;
+ cursor:pointer;min-height:125px;
  transition:.2s;
 }
 .game:active{transform:scale(.96)}
-.game .emoji{font-size:38px}
-.game h3{margin:9px 0 4px;font-size:17px}
-.game small{color:#d4def7}
+.game .emoji{font-size:37px}
+.game h3{margin:9px 0 4px;font-size:16px}
+.game small{color:#bdbddd}
 .panel{
- background:#101e42;
- border:1px solid #b78e39;
- border-radius:16px;
- padding:17px;
- margin-top:18px;
+ background:#1d1d43;border:1px solid #55558d;
+ border-radius:17px;padding:18px;margin-top:15px;
+ text-align:center;display:none;
 }
 button{
- border:0;
- border-radius:10px;
- padding:11px 15px;
- background:#e9bd55;
- color:#15203b;
- font-weight:bold;
- cursor:pointer;
- margin:5px;
+ background:linear-gradient(135deg,#ffd65a,#ff9e32);
+ color:#171735;border:0;border-radius:10px;
+ padding:12px 18px;font-size:15px;font-weight:bold;
+ margin:5px;cursor:pointer;
 }
-select,input{padding:9px;border-radius:8px}
-footer{text-align:center;padding:25px;color:#bbc8e8}
-#modal{
- display:none;
- position:fixed;
- inset:0;
- background:#000c;
- align-items:center;
- justify-content:center;
- padding:20px;
+.secondary{background:#45457a;color:white}
+input{
+ padding:12px;border-radius:9px;border:1px solid #777;
+ width:80%;font-size:17px;margin:10px;
 }
-.modalbox{
- background:#142957;
- border:2px solid #e9bd55;
- border-radius:18px;
- padding:25px;
- text-align:center;
- max-width:350px;
- width:100%;
-}
-.modalbox h2{color:#ffd76a}
-.setting-row{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- padding:9px 0;
- border-bottom:1px solid #34476d;
-}
-@media(min-width:600px){
- .games{grid-template-columns:repeat(4,1fr)}
-}
+.answer{display:block;width:100%;margin:9px 0}
+footer{text-align:center;padding:25px;color:#aaa;font-size:13px}
 </style>
 </head>
-
 <body>
 
 <header>
  <div class="logo">👑🎮</div>
- <h1>GAME DARBAR</h1>
- <p>खेलको आफ्नै संसार!</p>
- <small>Developed by Dilip Rimal</small>
+ <h1>GAME KINGDOM</h1>
+ <p>ALL IN ONE GAME WORLD</p>
+ <p>खेलौँ, रमाऔँ र जितौँ!</p>
 </header>
 
+<div class="stats">
+ <div class="stat">🏆 Score: <b id="score">0</b></div>
+ <div class="stat">🎮 Games: <b>5</b></div>
+</div>
+
 <main class="container">
-
- <div class="welcome">
-  <h2>स्वागत छ GAME DARBAR मा!</h2>
-  <p>आफ्नो मनपर्ने खेल छान्नुहोस् र रमाइलो गर्नुहोस्।</p>
-  <div>🏔️ 🇳🇵 🏔️</div>
- </div>
-
- <h2 class="section-title">🃏 कार्ड गेमहरू</h2>
-
- <div class="games">
-  <div class="game" onclick="openGame('Call Break')">
-   <div class="emoji">🂡</div>
-   <h3>Call Break</h3><small>Card Game</small>
+ <h2>🔥 SELECT YOUR GAME</h2>
+ <div class="grid">
+  <div class="game" onclick="openGame('dice')">
+   <div class="emoji">🎲</div><h3>Dice Challenge</h3><small>पासा खेल</small>
   </div>
-
-  <div class="game" onclick="openGame('Marriage')">
-   <div class="emoji">🃏</div>
-   <h3>Marriage</h3><small>Card Game</small>
+  <div class="game" onclick="openGame('quiz')">
+   <div class="emoji">🧠</div><h3>Quiz Challenge</h3><small>ज्ञान परीक्षण</small>
   </div>
-
-  <div class="game" onclick="openGame('Rummy')">
-   <div class="emoji">🎴</div>
-   <h3>Rummy</h3><small>Card Game</small>
+  <div class="game" onclick="openGame('ttt')">
+   <div class="emoji">⭕</div><h3>Tic Tac Toe</h3><small>Two Players</small>
   </div>
-
-  <div class="game" onclick="openGame('29')">
-   <div class="emoji">♠️</div>
-   <h3>29</h3><small>Card Game</small>
+  <div class="game" onclick="openGame('memory')">
+   <div class="emoji">🃏</div><h3>Memory Cards</h3><small>Card Matching</small>
   </div>
-
-  <div class="game" onclick="openGame('Teen Patti')">
-   <div class="emoji">🎴</div>
-   <h3>Teen Patti</h3><small>Free Play</small>
-  </div>
-
-  <div class="game" onclick="openGame('Poker')">
-   <div class="emoji">♣️</div>
-   <h3>Poker</h3><small>Free Play</small>
+  <div class="game" onclick="openGame('reaction')">
+   <div class="emoji">⚡</div><h3>Reaction Test</h3><small>Speed Challenge</small>
   </div>
  </div>
 
- <h2 class="section-title">🎲 बोर्ड गेमहरू</h2>
-
- <div class="games">
-  <div class="game" onclick="openGame('Ludo King')">
-   <div class="emoji">🎲</div>
-   <h3>Ludo King</h3><small>Board Game</small>
-  </div>
-
-  <div class="game" onclick="openGame('Bagh Chal')">
-   <div class="emoji">🐅</div>
-   <h3>Bagh Chal</h3><small>Nepali Traditional</small>
-  </div>
+ <div class="panel" id="panel">
+  <h2 id="gameTitle">GAME</h2>
+  <div id="gameArea"></div>
+  <button class="secondary" onclick="home()">🏠 HOME</button>
  </div>
 
- <div class="panel">
-  <h2 class="section-title">🔊 Sound Settings</h2>
-
-  <div class="setting-row">
-   <span>Game Sound</span>
-   <button id="soundBtn" onclick="toggleSound()">ON</button>
-  </div>
-
-  <div class="setting-row">
-   <span>Background Music</span>
-   <button id="musicBtn" onclick="toggleMusic()">OFF</button>
-  </div>
-
-  <div class="setting-row">
-   <span>Volume</span>
-   <input type="range" min="0" max="100" value="45"
-    oninput="volume=this.value/100">
-  </div>
-
-  <button onclick="testSound()">🔔 Test Sound</button>
+ <h2>🃏 CARD GAME ZONE</h2>
+ <div class="grid">
+  <div class="game" onclick="coming('Ludo')"><div class="emoji">🎲</div><h3>Ludo King</h3><small>Board Game</small></div>
+  <div class="game" onclick="coming('Call Break')"><div class="emoji">♠️</div><h3>Call Break</h3><small>Card Game</small></div>
+  <div class="game" onclick="coming('Marriage')"><div class="emoji">🂡</div><h3>Marriage</h3><small>Card Game</small></div>
+  <div class="game" onclick="coming('Rummy')"><div class="emoji">🃏</div><h3>Rummy</h3><small>Card Game</small></div>
+  <div class="game" onclick="coming('29 Card Game')"><div class="emoji">♦️</div><h3>29 Card Game</h3><small>Card Game</small></div>
  </div>
-
- <div class="panel" style="text-align:center">
-  <h2 style="color:#ffd76a">🏆 GAME DARBAR</h2>
-  <p>आफ्नो सीप बढाउनुहोस्, नयाँ खेल सिक्नुहोस् र रमाइलो गर्नुहोस्।</p>
-  <p>सबै कार्ड गेमहरू निःशुल्क मनोरञ्जनका लागि हुन्। वास्तविक पैसाको बाजी छैन।</p>
- </div>
-
 </main>
 
 <footer>
- © 2026 GAME DARBAR<br>
- Developed by Dilip Rimal 🇳🇵
+ GAME KINGDOM © 2026<br>
+ Developed by Dilip Rimal
 </footer>
 
-<div id="modal">
- <div class="modalbox">
-  <div style="font-size:45px">🎮</div>
-  <h2 id="gameTitle">Game</h2>
-  <p id="gameMessage">यो खेलको तयारी हुँदैछ।</p>
-  <button onclick="closeGame()">बन्द गर्नुहोस्</button>
- </div>
-</div>
-
 <script>
-let soundOn=true;
-let musicOn=false;
-let volume=.45;
-let audio=null;
+let score=Number(localStorage.getItem('gkScore')||0);
+let sound=true;
+let audio;
+function updateScore(){
+ document.getElementById('score').textContent=score;
+ localStorage.setItem('gkScore',score);
+}
+updateScore();
 
-function getAudio(){
- if(!audio){
-  const AC=window.AudioContext||window.webkitAudioContext;
-  if(AC) audio=new AC();
- }
- if(audio && audio.state==="suspended") audio.resume();
- return audio;
+function beep(freq=500){
+ if(!sound)return;
+ try{
+ audio=audio||new (window.AudioContext||window.webkitAudioContext)();
+ let o=audio.createOscillator(),g=audio.createGain();
+ o.connect(g);g.connect(audio.destination);
+ o.frequency.value=freq;
+ g.gain.value=.08;
+ o.start();o.stop(audio.currentTime+.12);
+ }catch(e){}
+}
+function points(n=10){score+=n;updateScore();beep(700)}
+function home(){document.getElementById('panel').style.display='none'}
+
+function openGame(type){
+ let panel=document.getElementById('panel');
+ let area=document.getElementById('gameArea');
+ panel.style.display='block';
+ document.getElementById('gameTitle').textContent=
+ ({dice:'🎲 DICE CHALLENGE',quiz:'🧠 QUIZ CHALLENGE',
+ ttt:'⭕ TIC TAC TOE',memory:'🃏 MEMORY CARDS',
+ reaction:'⚡ REACTION TEST'})[type];
+ if(type==='dice')dice(area);
+ if(type==='quiz')quiz(area);
+ if(type==='ttt')ttt(area);
+ if(type==='memory')memory(area);
+ if(type==='reaction')reaction(area);
+ panel.scrollIntoView({behavior:'smooth'});
 }
 
-function beep(freq=500,duration=.12){
- if(!soundOn)return;
- const a=getAudio();
- if(!a)return;
- const oscillator=a.createOscillator();
- const gain=a.createGain();
- oscillator.type="sine";
- oscillator.frequency.value=freq;
- gain.gain.setValueAtTime(volume*.15,a.currentTime);
- gain.gain.exponentialRampToValueAtTime(.001,a.currentTime+duration);
- oscillator.connect(gain);
- gain.connect(a.destination);
- oscillator.start();
- oscillator.stop(a.currentTime+duration);
+function dice(a){
+ a.innerHTML=`<h1 id="die">🎲</h1>
+ <p>पासा घुमाउनुहोस् र स्कोर कमाउनुहोस्!</p>
+ <button onclick="roll()">ROLL DICE</button>
+ <p id="diceResult">Ready?</p>`;
+}
+function roll(){
+ let n=Math.floor(Math.random()*6)+1;
+ document.getElementById('die').textContent=
+ ['','⚀','⚁','⚂','⚃','⚄','⚅'][n];
+ document.getElementById('diceResult').textContent='तपाईंले '+n+' ल्याउनुभयो!';
+ points(n);
 }
 
-function toggleSound(){
- soundOn=!soundOn;
- document.getElementById("soundBtn").textContent=soundOn?"ON":"OFF";
- if(soundOn)beep();
+const questions=[
+ ['नेपालको राजधानी कुन हो?',['काठमाडौं','पोखरा','चितवन'],0],
+ ['नेपालको राष्ट्रिय फूल कुन हो?',['गुलाब','लालीगुराँस','कमल'],1],
+ ['विश्वको सबैभन्दा अग्लो हिमाल कुन हो?',['K2','सगरमाथा','अन्नपूर्ण'],1],
+ ['एक हप्तामा कति दिन हुन्छ?',['५','६','७'],2],
+ ['नेपालको राष्ट्रिय जनावर कुन हो?',['गाई','बाघ','हात्ती'],0],
+ ['सूर्य कुन दिशाबाट उदाउँछ?',['पश्चिम','पूर्व','उत्तर'],1],
+ ['पानीको रासायनिक सूत्र के हो?',['CO2','H2O','O2'],1]
+];
+let qi=0;
+function quiz(a){
+ qi=0;showQuestion(a);
 }
-
-function toggleMusic(){
- musicOn=!musicOn;
- document.getElementById("musicBtn").textContent=musicOn?"ON":"OFF";
- if(musicOn){
-  getAudio();
-  beep(440,.2);
+function showQuestion(a){
+ let q=questions[qi];
+ a.innerHTML=`<h3>Question ${qi+1}/${questions.length}</h3>
+ <h3>${q[0]}</h3>`+
+ q[1].map((v,i)=>`<button class="answer" onclick="checkAnswer(${i})">${v}</button>`).join('');
+}
+function checkAnswer(n){
+ let q=questions[qi];
+ if(n===q[2]){
+ points(10);
+ alert('सही उत्तर! +10 points 🎉');
  }else{
-  beep(250,.1);
+ beep(180);alert('गलत उत्तर! सही उत्तर: '+q[1][q[2]]);
+ }
+ qi++;
+ if(qi>=questions.length){
+ document.getElementById('gameArea').innerHTML=
+ '<h2>Quiz Completed! 🏆</h2><button onclick="openGame(\\'quiz\\')">PLAY AGAIN</button>';
+ }else showQuestion(document.getElementById('gameArea'));
+}
+
+let board,player,finished;
+function ttt(a){
+ board=['','','','','','','','',''];player='X';finished=false;
+ drawBoard(a);
+}
+function drawBoard(a){
+ a.innerHTML=`<h3>Player ${player} को पालो</h3>
+ <div style="display:grid;grid-template-columns:repeat(3,85px);justify-content:center;gap:6px">
+ ${board.map((v,i)=>`<button style="height:75px;font-size:28px" onclick="move(${i})">${v}</button>`).join('')}
+ </div><button onclick="openGame('ttt')">Restart</button>`;
+}
+function move(i){
+ if(board[i]||finished)return;
+ board[i]=player;
+ let wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+ let win=wins.some(w=>w.every(x=>board[x]===player));
+ if(win){finished=true;points(20);alert('Player '+player+' Wins! 🏆');}
+ else if(board.every(Boolean)){finished=true;alert('Draw!');}
+ else player=player==='X'?'O':'X';
+ drawBoard(document.getElementById('gameArea'));
+}
+
+let cards,first,lock,matches;
+function memory(a){
+ cards=['🎯','🎲','🎮','👑','🎯','🎲','🎮','👑'];
+ cards.sort(()=>Math.random()-.5);
+ first=null;lock=false;matches=0;
+ drawCards(a);
+}
+function drawCards(a){
+ a.innerHTML='<p>मिल्ने दुई कार्ड खोज्नुहोस्!</p><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px">'+
+ cards.map((v,i)=>`<button style="height:65px;font-size:24px" id="card${i}" onclick="flip(${i})">❓</button>`).join('')+
+ '</div><p id="memoryStatus">0 जोडी मिल्यो</p><button onclick="openGame(\\'memory\\')">Restart</button>';
+}
+function flip(i){
+ if(lock||document.getElementById('card'+i).textContent!=='❓')return;
+ let el=document.getElementById('card'+i);
+ el.textContent=cards[i];beep(400);
+ if(first===null){first=i;return}
+ let old=first;first=null;
+ if(cards[old]===cards[i]){
+ matches++;points(10);
+ document.getElementById('memoryStatus').textContent=matches+' जोडी मिल्यो';
+ if(matches===4)alert('You Win! 🏆');
+ }else{
+ lock=true;
+ setTimeout(()=>{
+ document.getElementById('card'+old).textContent='❓';
+ el.textContent='❓';lock=false;
+ },800);
  }
 }
 
-function testSound(){
- beep(650,.2);
- setTimeout(()=>beep(850,.2),220);
+let startTime,timer;
+function reaction(a){
+ a.innerHTML='<p>हरियो भएपछि मात्र बटन थिच्नुहोस्!</p>'+
+ '<button id="reactBtn" style="width:100%;height:110px;background:#555" onclick="react()">START</button><p id="reactResult">Ready?</p>';
+ window.reactState='ready';
+}
+function react(){
+ let b=document.getElementById('reactBtn');
+ if(window.reactState==='ready'){
+ window.reactState='wait';b.textContent='WAIT...';b.style.background='#a33';
+ startTime=Date.now();
+ timer=setTimeout(()=>{
+ window.reactState='go';startTime=Date.now();
+ b.textContent='TAP NOW!';b.style.background='#20a35a';
+ },1000+Math.random()*2500);
+ }else if(window.reactState==='wait'){
+ clearTimeout(timer);window.reactState='ready';
+ document.getElementById('reactResult').textContent='Too early! फेरि प्रयास गर्नुहोस्।';
+ b.textContent='TRY AGAIN';b.style.background='#555';
+ }else if(window.reactState==='go'){
+ let ms=Date.now()-startTime;
+ window.reactState='ready';
+ document.getElementById('reactResult').textContent='Reaction: '+ms+' ms';
+ if(ms<500)points(20);
+ b.textContent='PLAY AGAIN';b.style.background='#555';
+ }
 }
 
-function openGame(name){
- beep(550,.12);
- document.getElementById("gameTitle").textContent="🎮 "+name;
- document.getElementById("gameMessage").textContent=
- name+" को वास्तविक गेमप्ले अर्को चरणमा थपिनेछ।";
- document.getElementById("modal").style.display="flex";
-}
-
-function closeGame(){
- document.getElementById("modal").style.display="none";
- beep(350,.1);
+function coming(name){
+ alert(name+' Game Mode अर्को अपडेटमा थपिनेछ।');
 }
 </script>
-
 </body>
 </html>
-
