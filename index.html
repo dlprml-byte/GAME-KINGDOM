@@ -1,4 +1,5 @@
-DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
@@ -10,108 +11,105 @@ DOCTYPE html>
 *{box-sizing:border-box}
 body{
  margin:0;
- background:#080d20;
- color:white;
  font-family:Arial,sans-serif;
+ color:white;
+ background:radial-gradient(circle at top,#253b78,#080d20 70%);
+ min-height:100vh;
 }
 header{
  text-align:center;
- padding:28px 10px;
- background:linear-gradient(135deg,#17295a,#080d20);
- border-bottom:2px solid #e9b64b;
+ padding:25px 10px;
 }
-.logo{
- font-size:34px;
- font-weight:900;
- color:#ffcf61;
+header h1{
+ font-size:32px;
+ margin:0;
+ color:#ffd76a;
+ text-shadow:0 0 15px #ffb700;
+ animation:pulse 2s infinite;
 }
-header p{color:#c4cee9}
-.container{
- max-width:900px;
- margin:auto;
- padding:16px;
+header p{color:#b9c9ed}
+@keyframes pulse{
+ 50%{text-shadow:0 0 30px gold,0 0 45px orange}
 }
-.banner{
- padding:22px 12px;
+.section-title{
  text-align:center;
- border-radius:16px;
- background:linear-gradient(120deg,#9d6017,#e8b94c,#70400c);
- margin-bottom:20px;
+ color:#ffd76a;
+ margin:15px;
 }
-.search{
- width:100%;
- padding:15px;
- border:1px solid #6576a7;
- border-radius:12px;
- background:#172344;
- color:white;
- font-size:16px;
- margin-bottom:20px;
+.slider{
+ display:flex;
+ overflow-x:auto;
+ scroll-snap-type:x mandatory;
+ gap:18px;
+ padding:20px;
+ scrollbar-width:none;
 }
-h2{color:#ffcf61}
-.games{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:13px;
-}
+.slider::-webkit-scrollbar{display:none}
 .game{
- background:linear-gradient(145deg,#253761,#111a34);
- border:1px solid #405783;
- border-radius:16px;
- padding:20px 8px;
- text-align:center;
- min-height:145px;
- cursor:pointer;
-}
-.game:active{transform:scale(.96)}
-.emoji{font-size:42px}
-.game h3{font-size:16px;margin:10px 0}
-.game span{
- color:#ffcf61;
- font-size:12px;
-}
-#modal{
- display:none;
- position:fixed;
- inset:0;
- background:#000d;
+ flex:0 0 85%;
+ max-width:360px;
+ margin:auto;
+ scroll-snap-align:center;
+ min-height:350px;
+ border:2px solid #657fff;
+ border-radius:25px;
+ background:linear-gradient(145deg,#182b58,#10172e);
+ display:flex;
+ flex-direction:column;
  align-items:center;
  justify-content:center;
- padding:18px;
- z-index:10;
+ box-shadow:0 0 22px #315bff66;
+ transition:.3s;
 }
-.panel{
- background:#172344;
- border:2px solid #e9b64b;
- border-radius:20px;
- width:100%;
- max-width:380px;
- padding:25px;
- text-align:center;
+.game:active{transform:scale(.96)}
+.game .emoji{
+ font-size:90px;
+ animation:float 2s infinite ease-in-out;
 }
-.panel h2{color:#ffcf61}
-button{
- padding:13px 20px;
- background:#e9b64b;
- color:#111;
+@keyframes float{
+ 50%{transform:translateY(-12px)}
+}
+.game h2{
+ font-size:30px;
+ color:#ffd76a;
+ text-shadow:0 0 12px #ffb700;
+ animation:pulse 2s infinite;
+}
+.game p{color:#c5d2f2}
+.play{
  border:0;
- border-radius:10px;
+ border-radius:30px;
+ padding:13px 35px;
+ background:linear-gradient(90deg,#ffbd36,#ff6b00);
+ color:#111;
+ font-size:17px;
  font-weight:bold;
- font-size:15px;
- margin:5px;
+ cursor:pointer;
 }
-.close{
- background:#405078;
+.controls{
+ display:flex;
+ justify-content:center;
+ gap:25px;
+ padding:10px;
+}
+.controls button{
+ background:#263d79;
  color:white;
+ border:1px solid #829bff;
+ padding:12px 22px;
+ border-radius:25px;
+ font-size:20px;
 }
-#result{font-size:24px;margin:20px 0}
+.dots{
+ text-align:center;
+ padding:10px;
+ color:#ffd76a;
+ letter-spacing:7px;
+}
 footer{
  text-align:center;
- color:#9caaca;
  padding:30px 10px;
-}
-@media(min-width:650px){
- .games{grid-template-columns:repeat(3,1fr)}
+ color:#9eadd1;
 }
 </style>
 </head>
@@ -119,160 +117,73 @@ footer{
 <body>
 
 <header>
- <div class="logo">👑 GAME KINGDOM</div>
- <p>ALL IN ONE GAME WORLD</p>
+<h1>👑 GAME KINGDOM 👑</h1>
+<p>Welcome to the Gaming World</p>
 </header>
 
-<div class="container">
+<h3 class="section-title">🎮 CHOOSE YOUR GAME</h3>
 
- <div class="banner">
-  <h2>🎮 WELCOME TO GAME KINGDOM</h2>
-  <p>Play • Enjoy • Challenge</p>
- </div>
+<div class="slider" id="slider">
 
- <input class="search" id="search"
- placeholder="🔍 Search Games..."
- oninput="searchGames()">
-
- <h2>🔥 ALL GAMES</h2>
-
- <div class="games" id="games">
-
-  <div class="game" data-name="call break" onclick="openGame('Call Break','🃏')">
-   <div class="emoji">🃏</div>
-   <h3>Call Break</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="marriage" onclick="openGame('Marriage','🎴')">
-   <div class="emoji">🎴</div>
-   <h3>Marriage</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="rummy" onclick="openGame('Rummy','♠️')">
-   <div class="emoji">♠️</div>
-   <h3>Rummy</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="teen patti" onclick="openGame('Teen Patti','♦️')">
-   <div class="emoji">♦️</div>
-   <h3>Teen Patti</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="29" onclick="openGame('29 Card Game','♥️')">
-   <div class="emoji">♥️</div>
-   <h3>29 Card Game</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="kitty" onclick="openGame('Kitty','🐱')">
-   <div class="emoji">🐱</div>
-   <h3>Kitty</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="dhumbal" onclick="openGame('Dhumbal','🎴')">
-   <div class="emoji">🎴</div>
-   <h3>Dhumbal</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="jut patti" onclick="openGame('Jut Patti','🂡')">
-   <div class="emoji">🂡</div>
-   <h3>Jut Patti</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="gin rummy" onclick="openGame('Gin Rummy','♣️')">
-   <div class="emoji">♣️</div>
-   <h3>Gin Rummy</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="ludo" onclick="openGame('Ludo','🎲')">
-   <div class="emoji">🎲</div>
-   <h3>Ludo</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="carrom" onclick="openGame('Carrom','⚫')">
-   <div class="emoji">⚫</div>
-   <h3>Carrom</h3><span>PLAY GAME</span>
-  </div>
-
-  <div class="game" data-name="jhandi burja" onclick="openGame('Jhandi Burja','🎯')">
-   <div class="emoji">🎯</div>
-   <h3>Jhandi Burja</h3><span>PLAY GAME</span>
-  </div>
-
- </div>
+<div class="game">
+<div class="emoji">🎲</div>
+<h2>LUDO KING</h2>
+<p>Play the classic Ludo game</p>
+<button class="play" onclick="openGame('ludo')">PLAY NOW</button>
 </div>
 
-<div id="modal">
- <div class="panel">
-  <div id="emoji" style="font-size:55px"></div>
-  <h2 id="name"></h2>
-  <p id="info"></p>
-  <div id="result"></div>
-  <button id="play" onclick="playGame()">START</button>
-  <br>
-  <button class="close" onclick="closeGame()">CLOSE</button>
- </div>
+<div class="game">
+<div class="emoji">⚡</div>
+<h2>CARROM</h2>
+<p>Enjoy the carrom challenge</p>
+<button class="play" onclick="openGame('carrom')">PLAY NOW</button>
 </div>
+
+<div class="game">
+<div class="emoji">🧠</div>
+<h2>QUIZ ARENA</h2>
+<p>Test your knowledge</p>
+<button class="play" onclick="openGame('quiz')">PLAY NOW</button>
+</div>
+
+</div>
+
+<div class="controls">
+<button onclick="moveSlide(-1)">❮</button>
+<button onclick="moveSlide(1)">❯</button>
+</div>
+
+<div class="dots">● ● ●</div>
 
 <footer>
- <h3>👑 GAME KINGDOM</h3>
- <p>Developed by Dilip Rimal</p>
- <p>Free Entertainment • No Real Money Betting</p>
+👑 GAME KINGDOM<br>
+Gaming • Fun • Entertainment
 </footer>
 
 <script>
-let current="";
+const slider=document.getElementById("slider");
 
-function beep(){
- try{
-  let a=new AudioContext();
-  let o=a.createOscillator();
-  let g=a.createGain();
-  o.connect(g);g.connect(a.destination);
-  o.frequency.value=600;
-  g.gain.value=.05;
-  o.start();
-  o.stop(a.currentTime+.12);
- }catch(e){}
-}
-
-function openGame(name,emoji){
- beep();
- current=name;
- document.getElementById("name").textContent=name;
- document.getElementById("emoji").textContent=emoji;
- document.getElementById("result").textContent="";
- document.getElementById("info").textContent=
- "Welcome to "+name+"!";
- document.getElementById("modal").style.display="flex";
- document.getElementById("play").style.display=
- name==="Jhandi Burja"?"inline-block":"none";
- if(name!=="Jhandi Burja"){
- document.getElementById("info").textContent=
- "यो गेमको खेल्ने मोड अर्को अपडेटमा थपिनेछ।";
- }
-}
-
-function playGame(){
- if(current==="Jhandi Burja"){
-  let faces=["⚀","⚁","⚂","⚃","⚄","⚅"];
-  let result=[];
-  for(let i=0;i<3;i++){
-   result.push(faces[Math.floor(Math.random()*6)]);
-  }
-  beep();
-  document.getElementById("result").textContent=result.join(" ");
- }
-}
-
-function closeGame(){
- document.getElementById("modal").style.display="none";
-}
-
-function searchGames(){
- let q=document.getElementById("search").value.toLowerCase();
- document.querySelectorAll(".game").forEach(g=>{
-  g.style.display=g.dataset.name.includes(q)?"block":"none";
+function moveSlide(direction){
+ const card=slider.querySelector(".game");
+ const gap=18;
+ slider.scrollBy({
+  left:direction*(card.offsetWidth+gap),
+  behavior:"smooth"
  });
+}
+
+let autoSlide=setInterval(()=>moveSlide(1),4000);
+
+slider.addEventListener("touchstart",()=>{
+ clearInterval(autoSlide);
+},{passive:true});
+
+function openGame(name){
+ if(name==="quiz"){
+  window.location.href="https://dlprml-byte.github.io/Quiz-Arena/";
+ }else{
+  alert(name.toUpperCase()+" GAME - Coming Soon!");
+ }
 }
 </script>
 
