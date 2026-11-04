@@ -6,149 +6,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080d20">
 <title>GAME KINGDOM</title>
+
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;
- font-family:Arial,sans-serif;
+ background:#080d20;
  color:white;
- background:radial-gradient(circle at top,#29366c,#080d20 65%);
- min-height:100vh;
+ font-family:Arial,sans-serif;
 }
 header{
- padding:25px 16px;
  text-align:center;
- background:linear-gradient(135deg,#171e40,#080d20);
- border-bottom:1px solid #d9a441;
+ padding:28px 10px;
+ background:linear-gradient(135deg,#17295a,#080d20);
+ border-bottom:2px solid #e9b64b;
 }
-.logo{font-size:38px;font-weight:900;color:#ffd56a}
-header p{color:#bbc6e5;margin:8px 0 0}
-.container{padding:18px;max-width:950px;margin:auto}
+.logo{
+ font-size:34px;
+ font-weight:900;
+ color:#ffcf61;
+}
+header p{color:#c4cee9}
+.container{
+ max-width:900px;
+ margin:auto;
+ padding:16px;
+}
 .banner{
- background:linear-gradient(120deg,#9a6416,#e6ad3c,#6f3e12);
- padding:20px;border-radius:17px;
- color:#fff;text-align:center;
+ padding:22px 12px;
+ text-align:center;
+ border-radius:16px;
+ background:linear-gradient(120deg,#9d6017,#e8b94c,#70400c);
  margin-bottom:20px;
- box-shadow:0 5px 20px #0008;
 }
-.banner h2{margin:0 0 8px}
 .search{
- width:100%;padding:15px;border-radius:12px;
- border:1px solid #53618e;background:#151e3b;
- color:white;font-size:16px;margin-bottom:18px;
- outline:none;
+ width:100%;
+ padding:15px;
+ border:1px solid #6576a7;
+ border-radius:12px;
+ background:#172344;
+ color:white;
+ font-size:16px;
+ margin-bottom:20px;
 }
-.categories{
- display:grid;grid-template-columns:repeat(2,1fr);
+h2{color:#ffcf61}
+.games{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
  gap:13px;
 }
 .game{
- background:linear-gradient(145deg,#202d52,#10182f);
- border:1px solid #35456e;border-radius:17px;
- padding:18px 8px;text-align:center;
- cursor:pointer;transition:.2s;
+ background:linear-gradient(145deg,#253761,#111a34);
+ border:1px solid #405783;
+ border-radius:16px;
+ padding:20px 8px;
+ text-align:center;
  min-height:145px;
+ cursor:pointer;
 }
 .game:active{transform:scale(.96)}
-.game:hover{border-color:#f3c35e}
-.emoji{font-size:42px;margin-bottom:12px}
-.game h3{margin:5px 0;font-size:17px}
-.game small{color:#aebcdb}
-.tag{
- display:inline-block;background:#25375d;
- color:#f5d27b;padding:5px 10px;
- border-radius:20px;font-size:11px;margin-top:9px;
-}
-.section-title{margin:22px 0 15px;color:#ffd56a}
-footer{text-align:center;color:#8996b8;padding:30px 10px}
-button{
- border:0;border-radius:10px;padding:12px 18px;
- background:#e8ae43;color:#171323;
- font-weight:bold;font-size:15px;cursor:pointer;
+.emoji{font-size:42px}
+.game h3{font-size:16px;margin:10px 0}
+.game span{
+ color:#ffcf61;
+ font-size:12px;
 }
 #modal{
- display:none;position:fixed;inset:0;
- background:#000d;z-index:10;
- align-items:center;justify-content:center;padding:18px;
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000d;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
+ z-index:10;
 }
 .panel{
- background:#172344;border:1px solid #e8ae43;
- padding:25px;border-radius:20px;
- width:100%;max-width:400px;text-align:center;
+ background:#172344;
+ border:2px solid #e9b64b;
+ border-radius:20px;
+ width:100%;
+ max-width:380px;
+ padding:25px;
+ text-align:center;
 }
-.panel h2{color:#ffd56a}
-.dice{font-size:42px;margin:12px}
-#result{color:#ffd56a;font-size:18px;margin:15px}
+.panel h2{color:#ffcf61}
+button{
+ padding:13px 20px;
+ background:#e9b64b;
+ color:#111;
+ border:0;
+ border-radius:10px;
+ font-weight:bold;
+ font-size:15px;
+ margin:5px;
+}
+.close{
+ background:#405078;
+ color:white;
+}
+#result{font-size:24px;margin:20px 0}
+footer{
+ text-align:center;
+ color:#9caaca;
+ padding:30px 10px;
+}
+@media(min-width:650px){
+ .games{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
+
 <body>
 
 <header>
  <div class="logo">👑 GAME KINGDOM</div>
- <p>१२ लोकप्रिय गेम एउटै ठाउँमा</p>
+ <p>ALL IN ONE GAME WORLD</p>
 </header>
 
 <div class="container">
 
  <div class="banner">
   <h2>🎮 WELCOME TO GAME KINGDOM</h2>
-  <div>Play • Enjoy • Challenge Friends</div>
+  <p>Play • Enjoy • Challenge</p>
  </div>
 
  <input class="search" id="search"
- placeholder="🔍 Search your favourite game..."
+ placeholder="🔍 Search Games..."
  oninput="searchGames()">
 
- <h3 class="section-title">🔥 ALL GAMES</h3>
+ <h2>🔥 ALL GAMES</h2>
 
- <div class="categories" id="games">
+ <div class="games" id="games">
 
   <div class="game" data-name="call break" onclick="openGame('Call Break','🃏')">
-   <div class="emoji">🃏</div><h3>Call Break</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🃏</div>
+   <h3>Call Break</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="marriage" onclick="openGame('Marriage','🎴')">
-   <div class="emoji">🎴</div><h3>Marriage</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🎴</div>
+   <h3>Marriage</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="rummy" onclick="openGame('Rummy','♠️')">
-   <div class="emoji">♠️</div><h3>Rummy</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">♠️</div>
+   <h3>Rummy</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="teen patti" onclick="openGame('Teen Patti','♦️')">
-   <div class="emoji">♦️</div><h3>Teen Patti</h3><small>Practice Mode</small><br><span class="tag">PLAY</span>
+   <div class="emoji">♦️</div>
+   <h3>Teen Patti</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="29" onclick="openGame('29 Card Game','♥️')">
-   <div class="emoji">♥️</div><h3>29 Card Game</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">♥️</div>
+   <h3>29 Card Game</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="kitty" onclick="openGame('Kitty','🐱')">
-   <div class="emoji">🐱</div><h3>Kitty</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🐱</div>
+   <h3>Kitty</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="dhumbal" onclick="openGame('Dhumbal','🎴')">
-   <div class="emoji">🎴</div><h3>Dhumbal</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🎴</div>
+   <h3>Dhumbal</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="jut patti" onclick="openGame('Jut Patti','🂡')">
-   <div class="emoji">🂡</div><h3>Jut Patti</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🂡</div>
+   <h3>Jut Patti</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="gin rummy" onclick="openGame('Gin Rummy','♣️')">
-   <div class="emoji">♣️</div><h3>Gin Rummy</h3><small>Card Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">♣️</div>
+   <h3>Gin Rummy</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="ludo" onclick="openGame('Ludo','🎲')">
-   <div class="emoji">🎲</div><h3>Ludo</h3><small>Board Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">🎲</div>
+   <h3>Ludo</h3><span>PLAY GAME</span>
   </div>
 
   <div class="game" data-name="carrom" onclick="openGame('Carrom','⚫')">
-   <div class="emoji">⚫</div><h3>Carrom</h3><small>Board Game</small><br><span class="tag">PLAY</span>
+   <div class="emoji">⚫</div>
+   <h3>Carrom</h3><span>PLAY GAME</span>
   </div>
 
-  <div class="game" data-name="jhandi burja jhandi burji" onclick="openGame('Jhandi Burja','🎯')">
-   <div class="emoji">🎯</div><h3>Jhandi Burja</h3><small>Dice Game</small><br><span class="tag">PLAY</span>
+  <div class="game" data-name="jhandi burja" onclick="openGame('Jhandi Burja','🎯')">
+   <div class="emoji">🎯</div>
+   <h3>Jhandi Burja</h3><span>PLAY GAME</span>
   </div>
 
  </div>
@@ -156,70 +204,64 @@ button{
 
 <div id="modal">
  <div class="panel">
-  <div id="gameEmoji" style="font-size:55px"></div>
-  <h2 id="gameName"></h2>
-  <p id="gameInfo">Practice mode</p>
-  <div id="diceArea"></div>
+  <div id="emoji" style="font-size:55px"></div>
+  <h2 id="name"></h2>
+  <p id="info"></p>
   <div id="result"></div>
-  <button id="startBtn" onclick="startGame()">START PRACTICE</button>
-  <br><br>
-  <button onclick="closeGame()" style="background:#34466d;color:white">CLOSE</button>
+  <button id="play" onclick="playGame()">START</button>
+  <br>
+  <button class="close" onclick="closeGame()">CLOSE</button>
  </div>
 </div>
 
 <footer>
- <div>👑 GAME KINGDOM</div>
- <p>Developed with ❤️ for Game Lovers</p>
+ <h3>👑 GAME KINGDOM</h3>
+ <p>Developed by Dilip Rimal</p>
  <p>Free Entertainment • No Real Money Betting</p>
 </footer>
 
 <script>
-let selectedGame="";
+let current="";
 
-function sound(){
+function beep(){
  try{
-  let ctx=new (window.AudioContext||window.webkitAudioContext)();
-  let osc=ctx.createOscillator();
-  let gain=ctx.createGain();
-  osc.connect(gain);gain.connect(ctx.destination);
-  osc.frequency.value=650;
-  gain.gain.value=.07;
-  osc.start();
-  osc.stop(ctx.currentTime+.09);
+  let a=new AudioContext();
+  let o=a.createOscillator();
+  let g=a.createGain();
+  o.connect(g);g.connect(a.destination);
+  o.frequency.value=600;
+  g.gain.value=.05;
+  o.start();
+  o.stop(a.currentTime+.12);
  }catch(e){}
 }
 
 function openGame(name,emoji){
- sound();
- selectedGame=name;
- document.getElementById("gameName").innerText=name;
- document.getElementById("gameEmoji").innerText=emoji;
- document.getElementById("result").innerText="";
- document.getElementById("diceArea").innerHTML="";
+ beep();
+ current=name;
+ document.getElementById("name").textContent=name;
+ document.getElementById("emoji").textContent=emoji;
+ document.getElementById("result").textContent="";
+ document.getElementById("info").textContent=
+ "Welcome to "+name+"!";
  document.getElementById("modal").style.display="flex";
-
- if(name==="Jhandi Burja"){
-  document.getElementById("gameInfo").innerText="Dice Practice Challenge";
-  document.getElementById("startBtn").style.display="inline-block";
- }else{
-  document.getElementById("gameInfo").innerText=
-   "यो गेमको खेल्ने सुविधा अर्को अपडेटमा थपिँदैछ।";
-  document.getElementById("startBtn").style.display="none";
+ document.getElementById("play").style.display=
+ name==="Jhandi Burja"?"inline-block":"none";
+ if(name!=="Jhandi Burja"){
+ document.getElementById("info").textContent=
+ "यो गेमको खेल्ने मोड अर्को अपडेटमा थपिनेछ।";
  }
 }
 
-function startGame(){
- if(selectedGame==="Jhandi Burja"){
+function playGame(){
+ if(current==="Jhandi Burja"){
   let faces=["⚀","⚁","⚂","⚃","⚄","⚅"];
-  let dice=[];
+  let result=[];
   for(let i=0;i<3;i++){
-   dice.push(faces[Math.floor(Math.random()*6)]);
+   result.push(faces[Math.floor(Math.random()*6)]);
   }
-  sound();
-  document.getElementById("diceArea").innerHTML=
-   '<div class="dice">'+dice.join(" ")+'</div>';
-  document.getElementById("result").innerText=
-   "🎉 अभ्यास राउन्ड पूरा भयो!";
+  beep();
+  document.getElementById("result").textContent=result.join(" ");
  }
 }
 
