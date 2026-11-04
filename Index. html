@@ -1,1 +1,287 @@
 
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#091638">
+<title>GAME DARBAR</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:linear-gradient(145deg,#07132e,#142c62,#080f27);
+ min-height:100vh;
+}
+header{
+ text-align:center;
+ padding:25px 12px;
+ background:linear-gradient(135deg,#07132e,#183d7c);
+ border-bottom:2px solid #e9bd55;
+}
+.logo{font-size:48px}
+h1{margin:5px;color:#ffd76a;font-size:32px}
+header p{margin:7px;color:#dce6ff}
+.container{max-width:850px;margin:auto;padding:15px}
+.welcome{
+ background:linear-gradient(120deg,#173d79,#101c42);
+ border:1px solid #d9ad48;
+ border-radius:18px;
+ padding:18px;
+ text-align:center;
+ margin-bottom:20px;
+}
+.welcome h2{color:#ffdb76;margin:5px}
+.section-title{color:#ffd76a;margin:22px 5px 12px}
+.games{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.game{
+ background:linear-gradient(145deg,#1c3970,#101b3c);
+ border:1px solid #b78e39;
+ border-radius:16px;
+ padding:18px 8px;
+ text-align:center;
+ cursor:pointer;
+ transition:.2s;
+}
+.game:active{transform:scale(.96)}
+.game .emoji{font-size:38px}
+.game h3{margin:9px 0 4px;font-size:17px}
+.game small{color:#d4def7}
+.panel{
+ background:#101e42;
+ border:1px solid #b78e39;
+ border-radius:16px;
+ padding:17px;
+ margin-top:18px;
+}
+button{
+ border:0;
+ border-radius:10px;
+ padding:11px 15px;
+ background:#e9bd55;
+ color:#15203b;
+ font-weight:bold;
+ cursor:pointer;
+ margin:5px;
+}
+select,input{padding:9px;border-radius:8px}
+footer{text-align:center;padding:25px;color:#bbc8e8}
+#modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000c;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.modalbox{
+ background:#142957;
+ border:2px solid #e9bd55;
+ border-radius:18px;
+ padding:25px;
+ text-align:center;
+ max-width:350px;
+ width:100%;
+}
+.modalbox h2{color:#ffd76a}
+.setting-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ padding:9px 0;
+ border-bottom:1px solid #34476d;
+}
+@media(min-width:600px){
+ .games{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">👑🎮</div>
+ <h1>GAME DARBAR</h1>
+ <p>खेलको आफ्नै संसार!</p>
+ <small>Developed by Dilip Rimal</small>
+</header>
+
+<main class="container">
+
+ <div class="welcome">
+  <h2>स्वागत छ GAME DARBAR मा!</h2>
+  <p>आफ्नो मनपर्ने खेल छान्नुहोस् र रमाइलो गर्नुहोस्।</p>
+  <div>🏔️ 🇳🇵 🏔️</div>
+ </div>
+
+ <h2 class="section-title">🃏 कार्ड गेमहरू</h2>
+
+ <div class="games">
+  <div class="game" onclick="openGame('Call Break')">
+   <div class="emoji">🂡</div>
+   <h3>Call Break</h3><small>Card Game</small>
+  </div>
+
+  <div class="game" onclick="openGame('Marriage')">
+   <div class="emoji">🃏</div>
+   <h3>Marriage</h3><small>Card Game</small>
+  </div>
+
+  <div class="game" onclick="openGame('Rummy')">
+   <div class="emoji">🎴</div>
+   <h3>Rummy</h3><small>Card Game</small>
+  </div>
+
+  <div class="game" onclick="openGame('29')">
+   <div class="emoji">♠️</div>
+   <h3>29</h3><small>Card Game</small>
+  </div>
+
+  <div class="game" onclick="openGame('Teen Patti')">
+   <div class="emoji">🎴</div>
+   <h3>Teen Patti</h3><small>Free Play</small>
+  </div>
+
+  <div class="game" onclick="openGame('Poker')">
+   <div class="emoji">♣️</div>
+   <h3>Poker</h3><small>Free Play</small>
+  </div>
+ </div>
+
+ <h2 class="section-title">🎲 बोर्ड गेमहरू</h2>
+
+ <div class="games">
+  <div class="game" onclick="openGame('Ludo King')">
+   <div class="emoji">🎲</div>
+   <h3>Ludo King</h3><small>Board Game</small>
+  </div>
+
+  <div class="game" onclick="openGame('Bagh Chal')">
+   <div class="emoji">🐅</div>
+   <h3>Bagh Chal</h3><small>Nepali Traditional</small>
+  </div>
+ </div>
+
+ <div class="panel">
+  <h2 class="section-title">🔊 Sound Settings</h2>
+
+  <div class="setting-row">
+   <span>Game Sound</span>
+   <button id="soundBtn" onclick="toggleSound()">ON</button>
+  </div>
+
+  <div class="setting-row">
+   <span>Background Music</span>
+   <button id="musicBtn" onclick="toggleMusic()">OFF</button>
+  </div>
+
+  <div class="setting-row">
+   <span>Volume</span>
+   <input type="range" min="0" max="100" value="45"
+    oninput="volume=this.value/100">
+  </div>
+
+  <button onclick="testSound()">🔔 Test Sound</button>
+ </div>
+
+ <div class="panel" style="text-align:center">
+  <h2 style="color:#ffd76a">🏆 GAME DARBAR</h2>
+  <p>आफ्नो सीप बढाउनुहोस्, नयाँ खेल सिक्नुहोस् र रमाइलो गर्नुहोस्।</p>
+  <p>सबै कार्ड गेमहरू निःशुल्क मनोरञ्जनका लागि हुन्। वास्तविक पैसाको बाजी छैन।</p>
+ </div>
+
+</main>
+
+<footer>
+ © 2026 GAME DARBAR<br>
+ Developed by Dilip Rimal 🇳🇵
+</footer>
+
+<div id="modal">
+ <div class="modalbox">
+  <div style="font-size:45px">🎮</div>
+  <h2 id="gameTitle">Game</h2>
+  <p id="gameMessage">यो खेलको तयारी हुँदैछ।</p>
+  <button onclick="closeGame()">बन्द गर्नुहोस्</button>
+ </div>
+</div>
+
+<script>
+let soundOn=true;
+let musicOn=false;
+let volume=.45;
+let audio=null;
+
+function getAudio(){
+ if(!audio){
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(AC) audio=new AC();
+ }
+ if(audio && audio.state==="suspended") audio.resume();
+ return audio;
+}
+
+function beep(freq=500,duration=.12){
+ if(!soundOn)return;
+ const a=getAudio();
+ if(!a)return;
+ const oscillator=a.createOscillator();
+ const gain=a.createGain();
+ oscillator.type="sine";
+ oscillator.frequency.value=freq;
+ gain.gain.setValueAtTime(volume*.15,a.currentTime);
+ gain.gain.exponentialRampToValueAtTime(.001,a.currentTime+duration);
+ oscillator.connect(gain);
+ gain.connect(a.destination);
+ oscillator.start();
+ oscillator.stop(a.currentTime+duration);
+}
+
+function toggleSound(){
+ soundOn=!soundOn;
+ document.getElementById("soundBtn").textContent=soundOn?"ON":"OFF";
+ if(soundOn)beep();
+}
+
+function toggleMusic(){
+ musicOn=!musicOn;
+ document.getElementById("musicBtn").textContent=musicOn?"ON":"OFF";
+ if(musicOn){
+  getAudio();
+  beep(440,.2);
+ }else{
+  beep(250,.1);
+ }
+}
+
+function testSound(){
+ beep(650,.2);
+ setTimeout(()=>beep(850,.2),220);
+}
+
+function openGame(name){
+ beep(550,.12);
+ document.getElementById("gameTitle").textContent="🎮 "+name;
+ document.getElementById("gameMessage").textContent=
+ name+" को वास्तविक गेमप्ले अर्को चरणमा थपिनेछ।";
+ document.getElementById("modal").style.display="flex";
+}
+
+function closeGame(){
+ document.getElementById("modal").style.display="none";
+ beep(350,.1);
+}
+</script>
+
+</body>
+</html>
+
