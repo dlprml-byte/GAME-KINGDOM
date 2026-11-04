@@ -4,188 +4,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d20">
+<meta name="theme-color" content="#080b20">
 <title>GAME KINGDOM</title>
-
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Arial,sans-serif;
- color:white;
- background:radial-gradient(circle at top,#253b78,#080d20 70%);
- min-height:100vh;
+ margin:0;background:#080b20;color:white;
+ font-family:Arial,sans-serif;overflow-x:hidden;
 }
-header{
- text-align:center;
- padding:25px 10px;
+header{text-align:center;padding:20px 10px 12px}
+.logo{
+ font-size:32px;font-weight:900;color:#ffd76a;
+ text-shadow:0 0 10px gold,0 0 25px orange;
+ animation:glow 2s infinite alternate;
 }
-header h1{
- font-size:32px;
- margin:0;
- color:#ffd76a;
- text-shadow:0 0 15px #ffb700;
- animation:pulse 2s infinite;
+@keyframes glow{
+ to{text-shadow:0 0 20px gold,0 0 40px #ff7300}
 }
-header p{color:#b9c9ed}
-@keyframes pulse{
- 50%{text-shadow:0 0 30px gold,0 0 45px orange}
+header p{color:#b8c7ef;margin:8px}
+.hero{
+ height:190px;margin:12px 14px 24px;
+ border-radius:22px;overflow:hidden;position:relative;
+ border:1px solid #697eff;
+ box-shadow:0 0 25px #365cff66;
 }
-.section-title{
- text-align:center;
- color:#ffd76a;
- margin:15px;
+.bgslide{
+ position:absolute;inset:0;opacity:0;
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ transition:opacity 1s;
+ text-align:center;padding:15px;
 }
+.bgslide.active{opacity:1}
+.bgslide h2{font-size:27px;color:#ffe28b;
+ text-shadow:0 0 15px gold;margin:5px}
+.bgslide p{margin:5px;color:#fff}
+.bg1{
+ background:radial-gradient(circle at center,#72502a,#192d63 55%,#080b20);
+}
+.bg2{
+ background:radial-gradient(circle at center,#6234a0,#123b70 55%,#080b20);
+}
+.hero-dots{
+ position:absolute;bottom:12px;left:0;right:0;
+ text-align:center;z-index:3;
+}
+.hero-dots button{
+ border:0;width:9px;height:9px;border-radius:50%;
+ margin:4px;background:#ffffff66;padding:0;
+}
+.hero-dots button.active{background:#ffd76a;width:23px}
+h3.title{text-align:center;color:#ffd76a;
+ letter-spacing:2px;margin:20px 0 5px}
 .slider{
- display:flex;
- overflow-x:auto;
+ display:flex;gap:15px;overflow-x:auto;
  scroll-snap-type:x mandatory;
- gap:18px;
- padding:20px;
+ padding:18px 7vw 22px;
  scrollbar-width:none;
+ -webkit-overflow-scrolling:touch;
 }
 .slider::-webkit-scrollbar{display:none}
 .game{
- flex:0 0 85%;
- max-width:360px;
- margin:auto;
+ flex:0 0 86%;max-width:370px;min-height:330px;
  scroll-snap-align:center;
- min-height:350px;
- border:2px solid #657fff;
- border-radius:25px;
- background:linear-gradient(145deg,#182b58,#10172e);
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:center;
- box-shadow:0 0 22px #315bff66;
- transition:.3s;
+ border:1px solid #627cff;border-radius:25px;
+ background:linear-gradient(145deg,#1b326b,#10152d);
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ box-shadow:0 0 20px #456aff66;
 }
-.game:active{transform:scale(.96)}
-.game .emoji{
- font-size:90px;
- animation:float 2s infinite ease-in-out;
-}
-@keyframes float{
- 50%{transform:translateY(-12px)}
-}
+.emoji{font-size:85px;animation:float 2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(5deg)}}
 .game h2{
- font-size:30px;
- color:#ffd76a;
- text-shadow:0 0 12px #ffb700;
- animation:pulse 2s infinite;
+ font-size:30px;color:#ffe08a;
+ text-shadow:0 0 10px gold,0 0 25px orange;
+ animation:nameGlow 2s infinite alternate;
 }
-.game p{color:#c5d2f2}
+@keyframes nameGlow{
+ to{text-shadow:0 0 20px #ffcf40,0 0 35px #ff7400}
+}
+.game p{color:#bdcafa}
 .play{
- border:0;
- border-radius:30px;
- padding:13px 35px;
- background:linear-gradient(90deg,#ffbd36,#ff6b00);
- color:#111;
- font-size:17px;
- font-weight:bold;
- cursor:pointer;
+ padding:13px 34px;border:0;border-radius:30px;
+ background:linear-gradient(90deg,#ffe16c,#ff8a18);
+ color:#171020;font-weight:bold;font-size:16px;
+ box-shadow:0 0 15px #ffb52d66;
 }
-.controls{
- display:flex;
- justify-content:center;
- gap:25px;
- padding:10px;
-}
+.controls{display:flex;justify-content:center;gap:25px}
 .controls button{
- background:#263d79;
- color:white;
- border:1px solid #829bff;
- padding:12px 22px;
- border-radius:25px;
- font-size:20px;
+ background:#243c7c;color:white;
+ border:1px solid #849bff;border-radius:50%;
+ width:48px;height:48px;font-size:22px;
 }
-.dots{
- text-align:center;
- padding:10px;
- color:#ffd76a;
- letter-spacing:7px;
-}
-footer{
- text-align:center;
- padding:30px 10px;
- color:#9eadd1;
-}
+footer{text-align:center;padding:28px;color:#91a3d5}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>👑 GAME KINGDOM 👑</h1>
-<p>Welcome to the Gaming World</p>
+ <div class="logo">👑 GAME KINGDOM 👑</div>
+ <p>WELCOME TO THE GAMING WORLD</p>
 </header>
 
-<h3 class="section-title">🎮 CHOOSE YOUR GAME</h3>
+<section class="hero">
+ <div class="bgslide bg1 active">
+  <div style="font-size:48px">🏰</div>
+  <h2>ROYAL GAME KINGDOM</h2>
+  <p>Enter the world of fun!</p>
+ </div>
+ <div class="bgslide bg2">
+  <div style="font-size:48px">⚡</div>
+  <h2>NEON GAMING ARENA</h2>
+  <p>Play • Enjoy • Challenge</p>
+ </div>
+ <div class="hero-dots">
+  <button class="active" onclick="showBg(0)"></button>
+  <button onclick="showBg(1)"></button>
+ </div>
+</section>
+
+<h3 class="title">🎮 SELECT YOUR GAME</h3>
 
 <div class="slider" id="slider">
 
-<div class="game">
-<div class="emoji">🎲</div>
-<h2>LUDO KING</h2>
-<p>Play the classic Ludo game</p>
-<button class="play" onclick="openGame('ludo')">PLAY NOW</button>
-</div>
+ <div class="game">
+  <div class="emoji">🎲</div>
+  <h2>LUDO KING</h2>
+  <p>Classic Ludo Fun</p>
+  <button class="play" onclick="openGame('ludo')">PLAY NOW</button>
+ </div>
 
-<div class="game">
-<div class="emoji">⚡</div>
-<h2>CARROM</h2>
-<p>Enjoy the carrom challenge</p>
-<button class="play" onclick="openGame('carrom')">PLAY NOW</button>
-</div>
+ <div class="game">
+  <div class="emoji">⚡</div>
+  <h2>CARROM</h2>
+  <p>Carrom Challenge</p>
+  <button class="play" onclick="openGame('carrom')">PLAY NOW</button>
+ </div>
 
-<div class="game">
-<div class="emoji">🧠</div>
-<h2>QUIZ ARENA</h2>
-<p>Test your knowledge</p>
-<button class="play" onclick="openGame('quiz')">PLAY NOW</button>
-</div>
+ <div class="game">
+  <div class="emoji">🧠</div>
+  <h2>QUIZ ARENA</h2>
+  <p>Test Your Knowledge</p>
+  <button class="play" onclick="openGame('quiz')">PLAY NOW</button>
+ </div>
 
 </div>
 
 <div class="controls">
-<button onclick="moveSlide(-1)">❮</button>
-<button onclick="moveSlide(1)">❯</button>
+ <button onclick="moveSlide(-1)">❮</button>
+ <button onclick="moveSlide(1)">❯</button>
 </div>
 
-<div class="dots">● ● ●</div>
-
 <footer>
-👑 GAME KINGDOM<br>
-Gaming • Fun • Entertainment
+ 👑 GAME KINGDOM 👑<br>
+ Gaming • Fun • Entertainment
 </footer>
 
 <script>
 const slider=document.getElementById("slider");
-
-function moveSlide(direction){
+function moveSlide(dir){
  const card=slider.querySelector(".game");
- const gap=18;
  slider.scrollBy({
-  left:direction*(card.offsetWidth+gap),
+  left:dir*(card.offsetWidth+15),
   behavior:"smooth"
  });
 }
+let bgIndex=0;
+const backgrounds=document.querySelectorAll(".bgslide");
+const dots=document.querySelectorAll(".hero-dots button");
 
-let autoSlide=setInterval(()=>moveSlide(1),4000);
+function showBg(n){
+ bgIndex=n;
+ backgrounds.forEach((el,i)=>el.classList.toggle("active",i===n));
+ dots.forEach((el,i)=>el.classList.toggle("active",i===n));
+}
+setInterval(()=>showBg((bgIndex+1)%2),4500);
 
+let auto=setInterval(()=>moveSlide(1),5000);
 slider.addEventListener("touchstart",()=>{
- clearInterval(autoSlide);
+ clearInterval(auto);
 },{passive:true});
 
 function openGame(name){
  if(name==="quiz"){
-  window.location.href="https://dlprml-byte.github.io/Quiz-Arena/";
+  location.href="https://dlprml-byte.github.io/Quiz-Arena/";
  }else{
-  alert(name.toUpperCase()+" GAME - Coming Soon!");
+  alert(name.toUpperCase()+" game is coming soon!");
  }
 }
 </script>
-
 </body>
 </html>
