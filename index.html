@@ -3,59 +3,49 @@
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080b20">
 <title>GAME KINGDOM</title>
+
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;background:#080b20;color:white;
  font-family:Arial,sans-serif;overflow-x:hidden;
 }
-header{text-align:center;padding:20px 10px 12px}
+header{text-align:center;padding:22px 10px}
 .logo{
- font-size:32px;font-weight:900;color:#ffd76a;
- text-shadow:0 0 10px gold,0 0 25px orange;
+ font-size:31px;font-weight:900;color:#ffd76a;
+ text-shadow:0 0 12px gold,0 0 25px orange;
  animation:glow 2s infinite alternate;
 }
 @keyframes glow{
- to{text-shadow:0 0 20px gold,0 0 40px #ff7300}
+ to{text-shadow:0 0 25px gold,0 0 45px orange}
 }
-header p{color:#b8c7ef;margin:8px}
+header p{color:#bdcafa}
+.sound{
+ position:fixed;right:14px;top:12px;z-index:10;
+ border:1px solid gold;border-radius:25px;
+ background:#172650;color:white;padding:10px 14px;
+}
 .hero{
- height:190px;margin:12px 14px 24px;
+ height:180px;margin:10px 14px 22px;
  border-radius:22px;overflow:hidden;position:relative;
  border:1px solid #697eff;
- box-shadow:0 0 25px #365cff66;
 }
 .bgslide{
  position:absolute;inset:0;opacity:0;
  display:flex;flex-direction:column;
  align-items:center;justify-content:center;
- transition:opacity 1s;
- text-align:center;padding:15px;
+ transition:opacity 1s;text-align:center;
 }
 .bgslide.active{opacity:1}
-.bgslide h2{font-size:27px;color:#ffe28b;
- text-shadow:0 0 15px gold;margin:5px}
-.bgslide p{margin:5px;color:#fff}
-.bg1{
- background:radial-gradient(circle at center,#72502a,#192d63 55%,#080b20);
-}
-.bg2{
- background:radial-gradient(circle at center,#6234a0,#123b70 55%,#080b20);
-}
-.hero-dots{
- position:absolute;bottom:12px;left:0;right:0;
- text-align:center;z-index:3;
-}
-.hero-dots button{
- border:0;width:9px;height:9px;border-radius:50%;
- margin:4px;background:#ffffff66;padding:0;
-}
-.hero-dots button.active{background:#ffd76a;width:23px}
-h3.title{text-align:center;color:#ffd76a;
- letter-spacing:2px;margin:20px 0 5px}
+.bgslide h2{color:#ffe28b;text-shadow:0 0 15px gold}
+.bg1{background:radial-gradient(circle,#72502a,#192d63 60%,#080b20)}
+.bg2{background:radial-gradient(circle,#6234a0,#123b70 60%,#080b20)}
+.dots{text-align:center;color:#ffd76a}
+.title{text-align:center;color:#ffd76a;letter-spacing:2px}
+.category{text-align:center;color:#b9c9ee;margin-top:25px}
 .slider{
  display:flex;gap:15px;overflow-x:auto;
  scroll-snap-type:x mandatory;
@@ -71,35 +61,59 @@ h3.title{text-align:center;color:#ffd76a;
  background:linear-gradient(145deg,#1b326b,#10152d);
  display:flex;flex-direction:column;
  align-items:center;justify-content:center;
- box-shadow:0 0 20px #456aff66;
+ box-shadow:0 0 22px #456aff66;
 }
-.emoji{font-size:85px;animation:float 2s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-12px) rotate(5deg)}}
+.cards{
+ display:flex;justify-content:center;
+ align-items:center;height:115px;
+}
+.playcard{
+ width:60px;height:88px;background:#fff;
+ color:#d71938;border-radius:8px;
+ border:2px solid #ddd;
+ display:flex;align-items:center;justify-content:center;
+ font-size:31px;font-weight:bold;
+ box-shadow:0 5px 12px #0008;
+ margin-left:-19px;
+ animation:cardFloat 2s infinite ease-in-out;
+}
+.playcard:nth-child(2){color:#111;animation-delay:.2s}
+.playcard:nth-child(3){animation-delay:.4s}
+.playcard:nth-child(4){color:#111;animation-delay:.6s}
+@keyframes cardFloat{
+ 50%{transform:translateY(-9px) rotate(3deg)}
+}
 .game h2{
- font-size:30px;color:#ffe08a;
- text-shadow:0 0 10px gold,0 0 25px orange;
+ font-size:27px;color:#ffe08a;
+ text-shadow:0 0 12px gold,0 0 25px orange;
  animation:nameGlow 2s infinite alternate;
 }
 @keyframes nameGlow{
- to{text-shadow:0 0 20px #ffcf40,0 0 35px #ff7400}
+ to{text-shadow:0 0 22px gold,0 0 35px orange}
 }
 .game p{color:#bdcafa}
 .play{
- padding:13px 34px;border:0;border-radius:30px;
+ padding:12px 32px;border:0;border-radius:30px;
  background:linear-gradient(90deg,#ffe16c,#ff8a18);
  color:#171020;font-weight:bold;font-size:16px;
- box-shadow:0 0 15px #ffb52d66;
 }
 .controls{display:flex;justify-content:center;gap:25px}
 .controls button{
- background:#243c7c;color:white;
- border:1px solid #849bff;border-radius:50%;
- width:48px;height:48px;font-size:22px;
+ background:#243c7c;color:white;border:1px solid #849bff;
+ border-radius:50%;width:45px;height:45px;font-size:20px;
 }
-footer{text-align:center;padding:28px;color:#91a3d5}
+footer{
+ text-align:center;padding:30px 10px;
+ color:#a9b9df;line-height:2;
+ border-top:1px solid #293b72;margin-top:25px;
+}
+footer strong{color:#ffd76a;font-size:18px}
 </style>
 </head>
+
 <body>
+
+<button class="sound" id="soundBtn" onclick="toggleSound()">🔇 Sound OFF</button>
 
 <header>
  <div class="logo">👑 GAME KINGDOM 👑</div>
@@ -108,90 +122,130 @@ footer{text-align:center;padding:28px;color:#91a3d5}
 
 <section class="hero">
  <div class="bgslide bg1 active">
-  <div style="font-size:48px">🏰</div>
+  <div style="font-size:45px">🏰</div>
   <h2>ROYAL GAME KINGDOM</h2>
   <p>Enter the world of fun!</p>
  </div>
  <div class="bgslide bg2">
-  <div style="font-size:48px">⚡</div>
+  <div style="font-size:45px">⚡</div>
   <h2>NEON GAMING ARENA</h2>
   <p>Play • Enjoy • Challenge</p>
  </div>
- <div class="hero-dots">
-  <button class="active" onclick="showBg(0)"></button>
-  <button onclick="showBg(1)"></button>
- </div>
 </section>
 
-<h3 class="title">🎮 SELECT YOUR GAME</h3>
+<h3 class="title">🎮 ALL GAMES</h3>
 
-<div class="slider" id="slider">
-
- <div class="game">
-  <div class="emoji">🎲</div>
-  <h2>LUDO KING</h2>
-  <p>Classic Ludo Fun</p>
-  <button class="play" onclick="openGame('ludo')">PLAY NOW</button>
- </div>
-
- <div class="game">
-  <div class="emoji">⚡</div>
-  <h2>CARROM</h2>
-  <p>Carrom Challenge</p>
-  <button class="play" onclick="openGame('carrom')">PLAY NOW</button>
- </div>
-
- <div class="game">
-  <div class="emoji">🧠</div>
-  <h2>QUIZ ARENA</h2>
-  <p>Test Your Knowledge</p>
-  <button class="play" onclick="openGame('quiz')">PLAY NOW</button>
- </div>
-
+<h4 class="category">🃏 CARD GAMES</h4>
+<div class="slider" id="cards"></div>
+<div class="controls">
+ <button onclick="move('cards',-1)">❮</button>
+ <button onclick="move('cards',1)">❯</button>
 </div>
 
+<h4 class="category">🎲 OTHER GAMES</h4>
+<div class="slider" id="other"></div>
 <div class="controls">
- <button onclick="moveSlide(-1)">❮</button>
- <button onclick="moveSlide(1)">❯</button>
+ <button onclick="move('other',-1)">❮</button>
+ <button onclick="move('other',1)">❯</button>
 </div>
 
 <footer>
  👑 GAME KINGDOM 👑<br>
- Gaming • Fun • Entertainment
+ Gaming • Fun • Entertainment<br>
+ <strong>Developed by Dilip Rimal</strong><br>
+ © 2026 GAME KINGDOM
 </footer>
 
 <script>
-const slider=document.getElementById("slider");
-function moveSlide(dir){
- const card=slider.querySelector(".game");
- slider.scrollBy({
+let soundOn=false;
+let audioContext=null;
+
+function playTone(freq=600,duration=.09){
+ if(!soundOn)return;
+ try{
+  audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();
+  if(audioContext.state==="suspended")audioContext.resume();
+  const osc=audioContext.createOscillator();
+  const gain=audioContext.createGain();
+  osc.frequency.value=freq;
+  gain.gain.setValueAtTime(.07,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);
+  osc.connect(gain);gain.connect(audioContext.destination);
+  osc.start();osc.stop(audioContext.currentTime+duration);
+ }catch(e){}
+}
+function toggleSound(){
+ soundOn=!soundOn;
+ document.getElementById("soundBtn").textContent=
+ soundOn?"🔊 Sound ON":"🔇 Sound OFF";
+ playTone(700);
+}
+
+const cardGames=[
+ ["CALL BREAK","🃏"],["MARRIAGE","♠️"],
+ ["RUMMY","♦️"],["29 CARD GAME","🎴"],
+ ["TEEN PATTI","♥️"],["GIN RUMMY","♣️"],
+ ["KITTY","🂡"],["DHUMBAL","🎴"],
+ ["JUTPATTI","🃏"]
+];
+const otherGames=[
+ ["LUDO KING","🎲"],["CARROM","⚡"],
+ ["QUIZ ARENA","🧠"]
+];
+
+function createGames(list,id){
+ const area=document.getElementById(id);
+ list.forEach(([name,emoji])=>{
+  const card=document.createElement("div");
+  card.className="game";
+  card.innerHTML=`
+   <div class="cards">
+    <div class="playcard">A</div>
+    <div class="playcard">K</div>
+    <div class="playcard">Q</div>
+    <div class="playcard">J</div>
+   </div>
+   <div style="font-size:38px">${emoji}</div>
+   <h2>${name}</h2>
+   <p>GAME KINGDOM</p>
+   <button class="play">PLAY NOW</button>`;
+  card.querySelector("button").onclick=()=>{
+   playTone(850);
+   if(name==="QUIZ ARENA"){
+    location.href="https://dlprml-byte.github.io/Quiz-Arena/";
+   }else{
+    alert(name+" - Coming Soon!");
+   }
+  };
+  area.appendChild(card);
+ });
+}
+createGames(cardGames,"cards");
+createGames(otherGames,"other");
+
+function move(id,dir){
+ const area=document.getElementById(id);
+ const card=area.querySelector(".game");
+ area.scrollBy({
   left:dir*(card.offsetWidth+15),
   behavior:"smooth"
  });
+ playTone(500);
 }
+
 let bgIndex=0;
-const backgrounds=document.querySelectorAll(".bgslide");
-const dots=document.querySelectorAll(".hero-dots button");
+const bgs=document.querySelectorAll(".bgslide");
+setInterval(()=>{
+ bgIndex=(bgIndex+1)%bgs.length;
+ bgs.forEach((bg,i)=>bg.classList.toggle("active",i===bgIndex));
+},4500);
 
-function showBg(n){
- bgIndex=n;
- backgrounds.forEach((el,i)=>el.classList.toggle("active",i===n));
- dots.forEach((el,i)=>el.classList.toggle("active",i===n));
-}
-setInterval(()=>showBg((bgIndex+1)%2),4500);
-
-let auto=setInterval(()=>moveSlide(1),5000);
-slider.addEventListener("touchstart",()=>{
- clearInterval(auto);
-},{passive:true});
-
-function openGame(name){
- if(name==="quiz"){
-  location.href="https://dlprml-byte.github.io/Quiz-Arena/";
- }else{
-  alert(name.toUpperCase()+" game is coming soon!");
- }
-}
+document.querySelectorAll(".slider").forEach(area=>{
+ area.addEventListener("scroll",()=>{
+  if(soundOn)playTone(350,.035);
+ },{passive:true});
+});
 </script>
+
 </body>
 </html>
