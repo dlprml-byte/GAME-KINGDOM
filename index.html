@@ -3,151 +3,159 @@
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080b20">
-<title>GAME KINGDOM</title>
+<title>GAME KINGDOM ONLINE</title>
 
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;background:#080b20;color:white;
- font-family:Arial,sans-serif;overflow-x:hidden;
+ font-family:Arial,sans-serif;
 }
-header{text-align:center;padding:22px 10px}
+header{
+ text-align:center;padding:25px 12px;
+ background:linear-gradient(140deg,#172b60,#080b20);
+ border-bottom:1px solid #d5a943;
+}
 .logo{
- font-size:31px;font-weight:900;color:#ffd76a;
- text-shadow:0 0 12px gold,0 0 25px orange;
- animation:glow 2s infinite alternate;
+ color:#ffda72;font-size:30px;font-weight:900;
+ text-shadow:0 0 15px orange;
 }
-@keyframes glow{
- to{text-shadow:0 0 25px gold,0 0 45px orange}
+header p{color:#c3cbea}
+button{
+ cursor:pointer;border:0;border-radius:12px;
+ padding:12px 17px;font-weight:bold;
 }
-header p{color:#bdcafa}
-.sound{
- position:fixed;right:14px;top:12px;z-index:10;
- border:1px solid gold;border-radius:25px;
- background:#172650;color:white;padding:10px 14px;
+.gold{
+ background:linear-gradient(90deg,#ffe58a,#ff9e28);
+ color:#171020;
 }
-.hero{
- height:180px;margin:10px 14px 22px;
- border-radius:22px;overflow:hidden;position:relative;
- border:1px solid #697eff;
+.blue{
+ background:#243c7c;color:white;
+ border:1px solid #7089dc;
 }
-.bgslide{
- position:absolute;inset:0;opacity:0;
- display:flex;flex-direction:column;
- align-items:center;justify-content:center;
- transition:opacity 1s;text-align:center;
+input{
+ width:100%;padding:14px;margin:7px 0;
+ border-radius:10px;border:1px solid #5269a8;
+ background:#101a38;color:white;font-size:16px;
 }
-.bgslide.active{opacity:1}
-.bgslide h2{color:#ffe28b;text-shadow:0 0 15px gold}
-.bg1{background:radial-gradient(circle,#72502a,#192d63 60%,#080b20)}
-.bg2{background:radial-gradient(circle,#6234a0,#123b70 60%,#080b20)}
-.dots{text-align:center;color:#ffd76a}
-.title{text-align:center;color:#ffd76a;letter-spacing:2px}
-.category{text-align:center;color:#b9c9ee;margin-top:25px}
-.slider{
- display:flex;gap:15px;overflow-x:auto;
- scroll-snap-type:x mandatory;
- padding:18px 7vw 22px;
- scrollbar-width:none;
- -webkit-overflow-scrolling:touch;
-}
-.slider::-webkit-scrollbar{display:none}
-.game{
- flex:0 0 86%;max-width:370px;min-height:330px;
- scroll-snap-align:center;
- border:1px solid #627cff;border-radius:25px;
+section{padding:15px}
+h2,h3{color:#ffda72}
+.panel{
  background:linear-gradient(145deg,#1b326b,#10152d);
- display:flex;flex-direction:column;
- align-items:center;justify-content:center;
- box-shadow:0 0 22px #456aff66;
+ border:1px solid #536ac0;border-radius:18px;
+ padding:17px;margin:12px 0;
 }
-.cards{
- display:flex;justify-content:center;
- align-items:center;height:115px;
+.status{color:#9ee9b0;font-size:14px}
+.games{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px;
 }
-.playcard{
- width:60px;height:88px;background:#fff;
- color:#d71938;border-radius:8px;
- border:2px solid #ddd;
- display:flex;align-items:center;justify-content:center;
- font-size:31px;font-weight:bold;
- box-shadow:0 5px 12px #0008;
- margin-left:-19px;
- animation:cardFloat 2s infinite ease-in-out;
+.game{
+ background:linear-gradient(145deg,#253e7d,#111831);
+ border:1px solid #657bd0;border-radius:16px;
+ padding:17px 8px;text-align:center;
+ min-height:135px;
 }
-.playcard:nth-child(2){color:#111;animation-delay:.2s}
-.playcard:nth-child(3){animation-delay:.4s}
-.playcard:nth-child(4){color:#111;animation-delay:.6s}
-@keyframes cardFloat{
- 50%{transform:translateY(-9px) rotate(3deg)}
-}
-.game h2{
- font-size:27px;color:#ffe08a;
- text-shadow:0 0 12px gold,0 0 25px orange;
- animation:nameGlow 2s infinite alternate;
-}
-@keyframes nameGlow{
- to{text-shadow:0 0 22px gold,0 0 35px orange}
-}
-.game p{color:#bdcafa}
-.play{
- padding:12px 32px;border:0;border-radius:30px;
- background:linear-gradient(90deg,#ffe16c,#ff8a18);
- color:#171020;font-weight:bold;font-size:16px;
-}
-.controls{display:flex;justify-content:center;gap:25px}
-.controls button{
- background:#243c7c;color:white;border:1px solid #849bff;
- border-radius:50%;width:45px;height:45px;font-size:20px;
+.game .emoji{font-size:35px}
+.game h3{font-size:15px;margin:9px 0}
+.game button{padding:9px 15px;font-size:12px}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1;min-width:0}
+.hidden{display:none!important}
+.player{
+ background:#101d40;border-radius:9px;
+ padding:10px;margin:6px 0;
 }
 footer{
- text-align:center;padding:30px 10px;
- color:#a9b9df;line-height:2;
- border-top:1px solid #293b72;margin-top:25px;
+ text-align:center;color:#aab8df;
+ padding:25px;border-top:1px solid #293b72;
 }
-footer strong{color:#ffd76a;font-size:18px}
+#roomCode{
+ font-size:27px;letter-spacing:5px;
+ color:#ffe18b;font-weight:bold;text-align:center;
+}
+.small{font-size:12px;color:#aab8df}
 </style>
 </head>
 
 <body>
 
-<button class="sound" id="soundBtn" onclick="toggleSound()">🔇 Sound OFF</button>
-
 <header>
  <div class="logo">👑 GAME KINGDOM 👑</div>
- <p>WELCOME TO THE GAMING WORLD</p>
+ <p>ONLINE CARD GAME ARENA</p>
+ <div class="status" id="connection">Connecting to Firebase...</div>
 </header>
 
-<section class="hero">
- <div class="bgslide bg1 active">
-  <div style="font-size:45px">🏰</div>
-  <h2>ROYAL GAME KINGDOM</h2>
-  <p>Enter the world of fun!</p>
- </div>
- <div class="bgslide bg2">
-  <div style="font-size:45px">⚡</div>
-  <h2>NEON GAMING ARENA</h2>
-  <p>Play • Enjoy • Challenge</p>
+<section>
+ <div class="panel">
+  <h2>👤 PLAYER PROFILE</h2>
+  <input id="playerName" maxlength="16"
+   placeholder="आफ्नो नाम लेख्नुहोस्">
+  <button class="gold" onclick="saveName()">SAVE NAME</button>
+  <p class="small" id="playerInfo">Connecting...</p>
  </div>
 </section>
 
-<h3 class="title">🎮 ALL GAMES</h3>
+<section>
+ <h2>🃏 SELECT YOUR GAME</h2>
+ <div class="games" id="games"></div>
+</section>
 
-<h4 class="category">🃏 CARD GAMES</h4>
-<div class="slider" id="cards"></div>
-<div class="controls">
- <button onclick="move('cards',-1)">❮</button>
- <button onclick="move('cards',1)">❯</button>
-</div>
+<section>
+ <div class="panel">
+  <h2>🤖 PLAY VS COMPUTER</h2>
+  <p>Computer सँग खेल्ने मोड छान्नुहोस्।</p>
+  <div class="row">
+   <button class="gold" onclick="computerMode()">PLAY NOW</button>
+  </div>
+  <p class="small">Computer gameplay engines अर्को अपडेटमा जोडिनेछन्।</p>
+ </div>
+</section>
 
-<h4 class="category">🎲 OTHER GAMES</h4>
-<div class="slider" id="other"></div>
-<div class="controls">
- <button onclick="move('other',-1)">❮</button>
- <button onclick="move('other',1)">❯</button>
-</div>
+<section>
+ <div class="panel">
+  <h2>🌐 ONLINE MULTIPLAYER</h2>
+  <p>आफ्ना साथीहरूसँग २–४ जना एउटै Room मा खेल्नुहोस्।</p>
+
+  <button class="gold" style="width:100%"
+   onclick="createRoom()">＋ CREATE ROOM</button>
+
+  <hr style="border-color:#344779;margin:20px 0">
+
+  <h3>JOIN ROOM</h3>
+  <input id="joinCode" maxlength="6"
+   placeholder="ROOM CODE लेख्नुहोस्">
+  <button class="blue" style="width:100%"
+   onclick="joinRoom()">JOIN ROOM</button>
+  <p class="small" id="roomMessage"></p>
+ </div>
+</section>
+
+<section id="roomSection" class="hidden">
+ <div class="panel">
+  <h2>🏠 GAME ROOM</h2>
+  <p>तपाईंको Room Code:</p>
+  <div id="roomCode">------</div>
+  <button class="blue" style="width:100%;margin-top:10px"
+   onclick="copyRoom()">COPY ROOM CODE</button>
+
+  <h3>👥 PLAYERS</h3>
+  <div id="players"></div>
+  <p id="playerCount" class="status"></p>
+
+  <h3>🎮 SELECT GAME</h3>
+  <select id="roomGame" onchange="selectRoomGame()"
+   style="width:100%;padding:13px;border-radius:10px">
+  </select>
+
+  <h3>Current Game</h3>
+  <p id="currentGame">Not selected</p>
+  <button class="blue" style="width:100%"
+   onclick="leaveRoom()">LEAVE ROOM</button>
+ </div>
+</section>
 
 <footer>
  👑 GAME KINGDOM 👑<br>
@@ -156,95 +164,286 @@ footer strong{color:#ffd76a;font-size:18px}
  © 2026 GAME KINGDOM
 </footer>
 
-<script>
-let soundOn=false;
-let audioContext=null;
+<script type="module">
 
-function playTone(freq=600,duration=.09){
- if(!soundOn)return;
- try{
-  audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();
-  if(audioContext.state==="suspended")audioContext.resume();
-  const osc=audioContext.createOscillator();
-  const gain=audioContext.createGain();
-  osc.frequency.value=freq;
-  gain.gain.setValueAtTime(.07,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);
-  osc.connect(gain);gain.connect(audioContext.destination);
-  osc.start();osc.stop(audioContext.currentTime+duration);
- }catch(e){}
-}
-function toggleSound(){
- soundOn=!soundOn;
- document.getElementById("soundBtn").textContent=
- soundOn?"🔊 Sound ON":"🔇 Sound OFF";
- playTone(700);
-}
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 
-const cardGames=[
- ["CALL BREAK","🃏"],["MARRIAGE","♠️"],
- ["RUMMY","♦️"],["29 CARD GAME","🎴"],
- ["TEEN PATTI","♥️"],["GIN RUMMY","♣️"],
- ["KITTY","🂡"],["DHUMBAL","🎴"],
- ["JUTPATTI","🃏"]
+import {
+ getDatabase, ref, set, get, update, onValue
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+
+import {
+ getAuth, signInAnonymously
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyDifXO6C5jNeK1MRNwzReLVJgTKouiAjRc",
+ authDomain: "game-kingdom-48dd3.firebaseapp.com",
+ databaseURL: "https://game-kingdom-48dd3-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId: "game-kingdom-48dd3",
+ storageBucket: "game-kingdom-48dd3.firebasestorage.app",
+ messagingSenderId: "838990555051",
+ appId: "1:838990555051:web:5e10fa446f6f58968954ee"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+let user = null;
+let currentRoom = null;
+let stopRoomListener = null;
+let selectedGame = "Call Break";
+
+const gameList = [
+ ["Call Break","♠️"],
+ ["Marriage","🂡"],
+ ["Rummy","♦️"],
+ ["29 Card Game","🎴"],
+ ["High Card Challenge","♥️"],
+ ["Gin Rummy","♣️"],
+ ["Kitty","🃏"],
+ ["Dhumbal","🎴"],
+ ["Jutpatti","🂱"]
 ];
-const otherGames=[
- ["LUDO KING","🎲"],["CARROM","⚡"],
- ["QUIZ ARENA","🧠"]
-];
 
-function createGames(list,id){
- const area=document.getElementById(id);
- list.forEach(([name,emoji])=>{
-  const card=document.createElement("div");
-  card.className="game";
-  card.innerHTML=`
-   <div class="cards">
-    <div class="playcard">A</div>
-    <div class="playcard">K</div>
-    <div class="playcard">Q</div>
-    <div class="playcard">J</div>
-   </div>
-   <div style="font-size:38px">${emoji}</div>
-   <h2>${name}</h2>
-   <p>GAME KINGDOM</p>
-   <button class="play">PLAY NOW</button>`;
-  card.querySelector("button").onclick=()=>{
-   playTone(850);
-   if(name==="QUIZ ARENA"){
-    location.href="https://dlprml-byte.github.io/Quiz-Arena/";
-   }else{
-    alert(name+" - Coming Soon!");
-   }
-  };
-  area.appendChild(card);
- });
-}
-createGames(cardGames,"cards");
-createGames(otherGames,"other");
+const gameArea = document.getElementById("games");
+const gameSelect = document.getElementById("roomGame");
 
-function move(id,dir){
- const area=document.getElementById(id);
- const card=area.querySelector(".game");
- area.scrollBy({
-  left:dir*(card.offsetWidth+15),
-  behavior:"smooth"
- });
- playTone(500);
-}
+gameList.forEach(([name,emoji])=>{
+ const div=document.createElement("div");
+ div.className="game";
+ div.innerHTML=`
+  <div class="emoji">${emoji}</div>
+  <h3>${name}</h3>
+  <button class="gold">SELECT</button>
+ `;
+ div.querySelector("button").onclick=()=>{
+  selectedGame=name;
+  gameSelect.value=name;
+  document.getElementById("roomMessage").textContent=
+   name+" selected";
+  document.getElementById("roomSection").scrollIntoView({
+   behavior:"smooth"
+  });
+ };
+ gameArea.appendChild(div);
 
-let bgIndex=0;
-const bgs=document.querySelectorAll(".bgslide");
-setInterval(()=>{
- bgIndex=(bgIndex+1)%bgs.length;
- bgs.forEach((bg,i)=>bg.classList.toggle("active",i===bgIndex));
-},4500);
-
-document.querySelectorAll(".slider").forEach(area=>{
- area.addEventListener("scroll",()=>{
-  if(soundOn)playTone(350,.035);
- },{passive:true});
+ const option=document.createElement("option");
+ option.value=name;
+ option.textContent=name;
+ gameSelect.appendChild(option);
 });
+
+function getName(){
+ return localStorage.getItem("gkPlayerName") || "Player";
+}
+
+document.getElementById("playerName").value=getName();
+
+function saveName(){
+ const name=document.getElementById("playerName").value.trim();
+ if(!name){
+  alert("आफ्नो नाम लेख्नुहोस्");
+  return;
+ }
+ localStorage.setItem("gkPlayerName",name);
+ document.getElementById("playerInfo").textContent=
+  "Name: "+name;
+ alert("Name saved!");
+}
+
+window.saveName=saveName;
+
+async function connect(){
+ try{
+  const result=await signInAnonymously(auth);
+  user=result.user;
+  document.getElementById("connection").textContent=
+   "🟢 Firebase Connected";
+  document.getElementById("playerInfo").textContent=
+   "Player ID: "+user.uid.slice(0,8);
+ }catch(error){
+  document.getElementById("connection").textContent=
+   "🔴 Connection Error: "+error.message;
+ }
+}
+
+await connect();
+
+function makeCode(){
+ return Math.random().toString(36)
+  .substring(2,8).toUpperCase();
+}
+
+function showRoom(code){
+ currentRoom=code;
+ document.getElementById("roomSection")
+  .classList.remove("hidden");
+ document.getElementById("roomCode").textContent=code;
+
+ if(stopRoomListener)stopRoomListener();
+
+ stopRoomListener=onValue(
+  ref(db,"rooms/"+code),
+  snapshot=>{
+   if(!snapshot.exists()){
+    document.getElementById("roomMessage").textContent=
+     "Room not found or closed";
+    return;
+   }
+
+   const room=snapshot.val();
+   const players=room.players || {};
+   const area=document.getElementById("players");
+   area.innerHTML="";
+
+   Object.values(players).forEach(player=>{
+    const div=document.createElement("div");
+    div.className="player";
+    div.textContent="👤 "+player.name;
+    area.appendChild(div);
+   });
+
+   const count=Object.keys(players).length;
+   document.getElementById("playerCount").textContent=
+    count+" / 4 Players";
+
+   document.getElementById("currentGame").textContent=
+    room.game || "Waiting for game selection";
+
+   if(room.game)gameSelect.value=room.game;
+  },
+  error=>{
+   document.getElementById("roomMessage").textContent=
+    "Room error: "+error.message;
+  }
+ );
+}
+
+window.createRoom=async function(){
+ if(!user){
+  alert("Firebase connection भएको छैन");
+  return;
+ }
+
+ try{
+  const code=makeCode();
+  const player={
+   name:getName(),
+   joinedAt:Date.now()
+  };
+
+  await set(ref(db,"rooms/"+code),{
+   host:user.uid,
+   game:selectedGame,
+   status:"waiting",
+   createdAt:Date.now(),
+   players:{
+    [user.uid]:player
+   }
+  });
+
+  showRoom(code);
+  document.getElementById("roomMessage").textContent=
+   "Room created successfully!";
+ }catch(error){
+  alert("Room बनाउन सकिएन: "+error.message);
+ }
+};
+
+window.joinRoom=async function(){
+ if(!user){
+  alert("Firebase connection भएको छैन");
+  return;
+ }
+
+ const code=document.getElementById("joinCode")
+  .value.trim().toUpperCase();
+
+ if(code.length!==6){
+  alert("६ अक्षरको Room Code राख्नुहोस्");
+  return;
+ }
+
+ try{
+  const roomRef=ref(db,"rooms/"+code);
+  const snapshot=await get(roomRef);
+
+  if(!snapshot.exists()){
+   alert("Room भेटिएन। Code जाँच गर्नुहोस्।");
+   return;
+  }
+
+  const room=snapshot.val();
+  const players=room.players || {};
+
+  if(!players[user.uid] &&
+     Object.keys(players).length>=4){
+   alert("Room भरिएको छ।");
+   return;
+  }
+
+  if(!players[user.uid]){
+   await update(ref(db,"rooms/"+code+"/players"),{
+    [user.uid]:{
+     name:getName(),
+     joinedAt:Date.now()
+    }
+   });
+  }
+
+  showRoom(code);
+  document.getElementById("roomMessage").textContent=
+   "Room joined!";
+ }catch(error){
+  alert("Join गर्न सकिएन: "+error.message);
+ }
+};
+
+window.selectRoomGame=async function(){
+ if(!currentRoom)return;
+
+ const game=gameSelect.value;
+ try{
+  await update(ref(db,"rooms/"+currentRoom),{
+   game:game
+  });
+  selectedGame=game;
+ }catch(error){
+  alert("Game select गर्न सकिएन: "+error.message);
+ }
+};
+
+window.copyRoom=async function(){
+ if(!currentRoom)return;
+ try{
+  await navigator.clipboard.writeText(currentRoom);
+  alert("Room Code copied: "+currentRoom);
+ }catch(error){
+  prompt("यो Room Code साथीलाई पठाउनुहोस्:",currentRoom);
+ }
+};
+
+window.leaveRoom=function(){
+ if(stopRoomListener){
+  stopRoomListener();
+  stopRoomListener=null;
+ }
+ currentRoom=null;
+ document.getElementById("roomSection")
+  .classList.add("hidden");
+ document.getElementById("roomMessage").textContent=
+  "You left the room. Player record may remain until cleanup.";
+};
+
+window.computerMode=function(){
+ alert(
+  "Computer Mode को वास्तविक gameplay अर्को अपडेटमा जोडिनेछ।"
+ );
+};
+
 </script>
 
 </body>
