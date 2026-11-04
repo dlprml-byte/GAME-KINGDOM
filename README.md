@@ -1,2 +1,2 @@
-# AME-KINGDOM
+# GAME-KINGDOM
 All in one game
