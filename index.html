@@ -4,447 +4,304 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b20">
-<title>GAME KINGDOM ONLINE</title>
-
+<meta name="theme-color" content="#071b50">
+<title>GAME KINGDOM</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#080b20;color:white;
- font-family:Arial,sans-serif;
+ margin:0;color:#fff;font-family:Arial,sans-serif;
+ background:radial-gradient(circle at top,#174a9c,#07112e 65%,#030817);
+ min-height:100vh
 }
-header{
- text-align:center;padding:25px 12px;
- background:linear-gradient(140deg,#172b60,#080b20);
- border-bottom:1px solid #d5a943;
-}
-.logo{
- color:#ffda72;font-size:30px;font-weight:900;
- text-shadow:0 0 15px orange;
-}
-header p{color:#c3cbea}
-button{
- cursor:pointer;border:0;border-radius:12px;
- padding:12px 17px;font-weight:bold;
-}
-.gold{
- background:linear-gradient(90deg,#ffe58a,#ff9e28);
- color:#171020;
-}
-.blue{
- background:#243c7c;color:white;
- border:1px solid #7089dc;
+header{text-align:center;padding:25px 12px 15px}
+.crown{font-size:38px}
+h1{margin:5px;color:#ffd76a;font-size:30px;letter-spacing:2px}
+header p{color:#c8d8ff;margin:7px}
+.section{padding:12px 15px}
+.section h2{color:#ffda72;font-size:19px}
+.profile{
+ background:#102b60;border:1px solid #d9ae4c;
+ border-radius:15px;padding:14px;margin:10px 0 18px
 }
 input{
- width:100%;padding:14px;margin:7px 0;
- border-radius:10px;border:1px solid #5269a8;
- background:#101a38;color:white;font-size:16px;
+ width:100%;padding:12px;border:0;border-radius:9px;
+ margin:8px 0;background:#fff;color:#111;font-size:16px
 }
-section{padding:15px}
-h2,h3{color:#ffda72}
-.panel{
- background:linear-gradient(145deg,#1b326b,#10152d);
- border:1px solid #536ac0;border-radius:18px;
- padding:17px;margin:12px 0;
+button{
+ border:0;border-radius:9px;padding:11px 16px;
+ background:linear-gradient(135deg,#ffe28b,#d89c25);
+ color:#17234b;font-weight:bold;cursor:pointer
 }
-.status{color:#9ee9b0;font-size:14px}
 .games{
- display:grid;grid-template-columns:repeat(2,1fr);
- gap:12px;
+ display:flex;gap:14px;overflow-x:auto;
+ padding:10px 3px 20px;scroll-snap-type:x mandatory;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none
 }
+.games::-webkit-scrollbar{display:none}
 .game{
- background:linear-gradient(145deg,#253e7d,#111831);
- border:1px solid #657bd0;border-radius:16px;
- padding:17px 8px;text-align:center;
- min-height:135px;
+ flex:0 0 72%;max-width:245px;min-height:190px;
+ scroll-snap-align:center;position:relative;overflow:hidden;
+ border:1px solid #e8c35f;border-radius:20px;
+ background:linear-gradient(145deg,#173f83,#091638);
+ box-shadow:0 8px 22px #0008;text-align:center;
+ padding:20px 12px;cursor:pointer;
+ transition:.25s
 }
-.game .emoji{font-size:35px}
-.game h3{font-size:15px;margin:9px 0}
-.game button{padding:9px 15px;font-size:12px}
-.row{display:flex;gap:8px;align-items:center}
-.row>*{flex:1;min-width:0}
-.hidden{display:none!important}
-.player{
- background:#101d40;border-radius:9px;
- padding:10px;margin:6px 0;
+.game:active{transform:scale(.96)}
+.game .emoji{font-size:58px;display:block;margin:8px}
+.game h3{
+ color:#ffe08a;font-size:19px;
+ animation:glow 1.8s infinite alternate
 }
-footer{
- text-align:center;color:#aab8df;
- padding:25px;border-top:1px solid #293b72;
+.game p{font-size:12px;color:#c9d8ff}
+@keyframes glow{
+ from{text-shadow:0 0 3px #ffcf55}
+ to{text-shadow:0 0 15px #ffd45d,0 0 25px #e9a52c}
 }
-#roomCode{
- font-size:27px;letter-spacing:5px;
- color:#ffe18b;font-weight:bold;text-align:center;
+.game:after{
+ content:"";position:absolute;width:100px;height:100px;
+ background:#ffffff0c;border-radius:50%;top:-35px;right:-25px
 }
-.small{font-size:12px;color:#aab8df}
+.slidehint{text-align:center;color:#b8caff;font-size:12px}
+.panel{
+ display:none;margin:15px;padding:16px;
+ background:#102653;border:1px solid #d7b65d;
+ border-radius:18px;text-align:center
+}
+.panel h2{color:#ffdc7d}
+.back{background:#dce8ff;color:#102653;margin-bottom:12px}
+.status{color:#ffe08a;min-height:28px;margin:12px}
+.board{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:5px;max-width:300px;margin:15px auto
+}
+.cell{
+ background:#e8d39a;color:#17234b;border-radius:8px;
+ min-height:55px;display:grid;place-items:center;
+ font-size:22px;font-weight:bold;cursor:pointer
+}
+.ludoBoard{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:5px;max-width:300px;margin:15px auto
+}
+.ludoCell{
+ height:55px;background:#e5d6a9;color:#18234c;
+ border-radius:8px;display:grid;place-items:center;font-size:21px
+}
+canvas{
+ width:100%;max-width:330px;background:#c58b43;
+ border:8px solid #e9cf8d;border-radius:50%;
+ display:block;margin:15px auto;touch-action:manipulation
+}
+footer{text-align:center;padding:25px 10px;color:#b7caff;font-size:13px}
 </style>
 </head>
-
 <body>
 
 <header>
- <div class="logo">👑 GAME KINGDOM 👑</div>
- <p>ONLINE CARD GAME ARENA</p>
- <div class="status" id="connection">Connecting to Firebase...</div>
+ <div class="crown">👑</div>
+ <h1>GAME KINGDOM</h1>
+ <p>THE ROYAL WORLD OF GAMES</p>
 </header>
 
-<section>
- <div class="panel">
-  <h2>👤 PLAYER PROFILE</h2>
-  <input id="playerName" maxlength="16"
-   placeholder="आफ्नो नाम लेख्नुहोस्">
-  <button class="gold" onclick="saveName()">SAVE NAME</button>
-  <p class="small" id="playerInfo">Connecting...</p>
+<div class="section">
+ <div class="profile">
+  <b>🎮 Player Profile</b>
+  <input id="playerName" placeholder="आफ्नो नाम लेख्नुहोस्">
+  <button onclick="saveName()">Save Name</button>
+  <p id="welcome">Welcome to Game Kingdom!</p>
  </div>
-</section>
 
-<section>
- <h2>🃏 SELECT YOUR GAME</h2>
+ <h2>👑 KINGDOM GAME COLLECTION</h2>
+ <p class="slidehint">गेम हेर्न दायाँ-बायाँ Slide गर्नुहोस् ⬅️ ➡️</p>
  <div class="games" id="games"></div>
-</section>
+</div>
 
-<section>
- <div class="panel">
-  <h2>🤖 PLAY VS COMPUTER</h2>
-  <p>Computer सँग खेल्ने मोड छान्नुहोस्।</p>
-  <div class="row">
-   <button class="gold" onclick="computerMode()">PLAY NOW</button>
-  </div>
-  <p class="small">Computer gameplay engines अर्को अपडेटमा जोडिनेछन्।</p>
- </div>
-</section>
-
-<section>
- <div class="panel">
-  <h2>🌐 ONLINE MULTIPLAYER</h2>
-  <p>आफ्ना साथीहरूसँग २–४ जना एउटै Room मा खेल्नुहोस्।</p>
-
-  <button class="gold" style="width:100%"
-   onclick="createRoom()">＋ CREATE ROOM</button>
-
-  <hr style="border-color:#344779;margin:20px 0">
-
-  <h3>JOIN ROOM</h3>
-  <input id="joinCode" maxlength="6"
-   placeholder="ROOM CODE लेख्नुहोस्">
-  <button class="blue" style="width:100%"
-   onclick="joinRoom()">JOIN ROOM</button>
-  <p class="small" id="roomMessage"></p>
- </div>
-</section>
-
-<section id="roomSection" class="hidden">
- <div class="panel">
-  <h2>🏠 GAME ROOM</h2>
-  <p>तपाईंको Room Code:</p>
-  <div id="roomCode">------</div>
-  <button class="blue" style="width:100%;margin-top:10px"
-   onclick="copyRoom()">COPY ROOM CODE</button>
-
-  <h3>👥 PLAYERS</h3>
-  <div id="players"></div>
-  <p id="playerCount" class="status"></p>
-
-  <h3>🎮 SELECT GAME</h3>
-  <select id="roomGame" onchange="selectRoomGame()"
-   style="width:100%;padding:13px;border-radius:10px">
-  </select>
-
-  <h3>Current Game</h3>
-  <p id="currentGame">Not selected</p>
-  <button class="blue" style="width:100%"
-   onclick="leaveRoom()">LEAVE ROOM</button>
- </div>
-</section>
+<div class="panel" id="gamePanel">
+ <button class="back" onclick="closeGame()">← Back to Kingdom</button>
+ <h2 id="gameTitle">Game</h2>
+ <div id="gameContent"></div>
+ <div class="status" id="status"></div>
+</div>
 
 <footer>
- 👑 GAME KINGDOM 👑<br>
- Gaming • Fun • Entertainment<br>
- <strong>Developed by Dilip Rimal</strong><br>
- © 2026 GAME KINGDOM
+ 👑 GAME KINGDOM 👑<br><br>
+ Developed by <b>Dilip Rimal</b><br>
+ © 2026 Game Kingdom
 </footer>
 
-<script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-
-import {
- getDatabase, ref, set, get, update, onValue
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
-
-import {
- getAuth, signInAnonymously
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-
-const firebaseConfig = {
- apiKey: "AIzaSyDifXO6C5jNeK1MRNwzReLVJgTKouiAjRc",
- authDomain: "game-kingdom-48dd3.firebaseapp.com",
- databaseURL: "https://game-kingdom-48dd3-default-rtdb.asia-southeast1.firebasedatabase.app",
- projectId: "game-kingdom-48dd3",
- storageBucket: "game-kingdom-48dd3.firebasestorage.app",
- messagingSenderId: "838990555051",
- appId: "1:838990555051:web:5e10fa446f6f58968954ee"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
-
-let user = null;
-let currentRoom = null;
-let stopRoomListener = null;
-let selectedGame = "Call Break";
-
-const gameList = [
- ["Call Break","♠️"],
- ["Marriage","🂡"],
- ["Rummy","♦️"],
- ["29 Card Game","🎴"],
- ["High Card Challenge","♥️"],
- ["Gin Rummy","♣️"],
- ["Kitty","🃏"],
- ["Dhumbal","🎴"],
- ["Jutpatti","🂱"]
+<script>
+const gameList=[
+ ["Ludo","🎲","Play Ludo"],
+ ["Bagchal","🐅","Tiger & Goat"],
+ ["Carrom","🔴","Carrom Board"],
+ ["Call Break","🃏","Card Game"],
+ ["Marriage","🎴","Marriage Card"],
+ ["Rummy","♠️","Rummy Cards"],
+ ["29 Card Game","♦️","Twenty Nine"],
+ ["Teen Patti","🎰","Teen Patti"],
+ ["Poker","♣️","Poker Cards"],
+ ["Gin Rummy","🂡","Gin Rummy"],
+ ["Dhumbal","🎴","Dhumbal Cards"],
+ ["Kitty","🃏","Kitty Card Game"]
 ];
 
-const gameArea = document.getElementById("games");
-const gameSelect = document.getElementById("roomGame");
-
-gameList.forEach(([name,emoji])=>{
- const div=document.createElement("div");
- div.className="game";
- div.innerHTML=`
-  <div class="emoji">${emoji}</div>
-  <h3>${name}</h3>
-  <button class="gold">SELECT</button>
- `;
- div.querySelector("button").onclick=()=>{
-  selectedGame=name;
-  gameSelect.value=name;
-  document.getElementById("roomMessage").textContent=
-   name+" selected";
-  document.getElementById("roomSection").scrollIntoView({
-   behavior:"smooth"
-  });
- };
- gameArea.appendChild(div);
-
- const option=document.createElement("option");
- option.value=name;
- option.textContent=name;
- gameSelect.appendChild(option);
+const games=document.getElementById("games");
+gameList.forEach((g,i)=>{
+ const card=document.createElement("div");
+ card.className="game";
+ card.innerHTML=`<span class="emoji">${g[1]}</span>
+ <h3>${g[0]}</h3><p>${g[2]}</p><button>PLAY NOW</button>`;
+ card.onclick=()=>openGame(g[0]);
+ games.appendChild(card);
 });
 
-function getName(){
- return localStorage.getItem("gkPlayerName") || "Player";
-}
-
-document.getElementById("playerName").value=getName();
-
 function saveName(){
- const name=document.getElementById("playerName").value.trim();
- if(!name){
-  alert("आफ्नो नाम लेख्नुहोस्");
-  return;
+ const n=document.getElementById("playerName").value.trim();
+ if(!n)return alert("नाम लेख्नुहोस्");
+ localStorage.setItem("kingdomName",n);
+ document.getElementById("welcome").textContent="Welcome, "+n+"! 👑";
+}
+const saved=localStorage.getItem("kingdomName");
+if(saved){
+ document.getElementById("playerName").value=saved;
+ document.getElementById("welcome").textContent="Welcome, "+saved+"! 👑";
+}
+
+let currentGame="";
+function openGame(name){
+ currentGame=name;
+ document.getElementById("gamePanel").style.display="block";
+ document.getElementById("gameTitle").textContent="👑 "+name;
+ document.getElementById("status").textContent="";
+ const c=document.getElementById("gameContent");
+ c.innerHTML="";
+ document.getElementById("gamePanel").scrollIntoView({behavior:"smooth"});
+ if(name==="Ludo")ludo(c);
+ else if(name==="Bagchal")bagchal(c);
+ else if(name==="Carrom")carrom(c);
+ else c.innerHTML=`<h3>${name}</h3>
+ <p>यो गेमको पूरा gameplay निर्माण हुँदैछ।</p>
+ <p>GAME KINGDOM मा छिट्टै उपलब्ध हुनेछ।</p> 🎮`;
+}
+function closeGame(){
+ document.getElementById("gamePanel").style.display="none";
+ document.getElementById("gameContent").innerHTML="";
+}
+
+function ludo(c){
+ let pos=0,turn=0;
+ c.innerHTML=`<h3>🎲 LUDO MINI</h3>
+ <p>Dice फाल्नुहोस् र आफ्नो गोटी अगाडि बढाउनुहोस्।</p>
+ <div class="ludoBoard" id="ludoBoard"></div>
+ <button onclick="rollLudo()">🎲 Roll Dice</button>
+ <div class="status" id="ludoStatus">तपाईंको पालो</div>`;
+ drawLudo();
+ function drawLudo(){
+  const b=document.getElementById("ludoBoard");
+  b.innerHTML="";
+  for(let i=0;i<16;i++){
+   const d=document.createElement("div");
+   d.className="ludoCell";
+   d.textContent=i===pos?"🔴":(i===15?"🏁":"");
+   b.appendChild(d);
+  }
  }
- localStorage.setItem("gkPlayerName",name);
- document.getElementById("playerInfo").textContent=
-  "Name: "+name;
- alert("Name saved!");
+ window.rollLudo=function(){
+  const dice=Math.floor(Math.random()*6)+1;
+  pos+=dice;
+  if(pos>=15)pos=15;
+  document.getElementById("ludoStatus").textContent=
+   "तपाईंले "+dice+" पाउनुभयो! स्थान: "+pos;
+  drawLudo();
+  if(pos===15)document.getElementById("ludoStatus").textContent="🏆 तपाईं विजेता!";
+ };
 }
 
-window.saveName=saveName;
-
-async function connect(){
- try{
-  const result=await signInAnonymously(auth);
-  user=result.user;
-  document.getElementById("connection").textContent=
-   "🟢 Firebase Connected";
-  document.getElementById("playerInfo").textContent=
-   "Player ID: "+user.uid.slice(0,8);
- }catch(error){
-  document.getElementById("connection").textContent=
-   "🔴 Connection Error: "+error.message;
+function bagchal(c){
+ let board=Array(25).fill("");
+ board[0]="🐅";board[4]="🐅";board[20]="🐅";board[24]="🐅";
+ let goats=0,selected=-1,goatTurn=true;
+ c.innerHTML=`<h3>🐅 BAGCHAL MINI</h3>
+ <p>बाख्रा राख्नुहोस्, बाघलाई रोक्नुहोस्।</p>
+ <div class="board" id="bagBoard"></div>
+ <p id="bagInfo">बाख्राको पालो: खाली घर छान्नुहोस्</p>`;
+ draw();
+ function draw(){
+  const b=document.getElementById("bagBoard");b.innerHTML="";
+  board.forEach((v,i)=>{
+   const d=document.createElement("div");d.className="cell";
+   d.textContent=v||"·";
+   d.style.outline=selected===i?"3px solid #ffcf55":"none";
+   d.onclick=()=>tap(i);b.appendChild(d);
+  });
  }
-}
-
-await connect();
-
-function makeCode(){
- return Math.random().toString(36)
-  .substring(2,8).toUpperCase();
-}
-
-function showRoom(code){
- currentRoom=code;
- document.getElementById("roomSection")
-  .classList.remove("hidden");
- document.getElementById("roomCode").textContent=code;
-
- if(stopRoomListener)stopRoomListener();
-
- stopRoomListener=onValue(
-  ref(db,"rooms/"+code),
-  snapshot=>{
-   if(!snapshot.exists()){
-    document.getElementById("roomMessage").textContent=
-     "Room not found or closed";
+ function tap(i){
+  if(goatTurn){
+   if(board[i])return;
+   board[i]="🐐";goats++;goatTurn=false;
+   document.getElementById("bagInfo").textContent="बाघको पालो: बाघ छान्नुहोस्";
+  }else{
+   if(board[i]!=="🐅")return;
+   selected=i;draw();
+   const target=board.findIndex((v,j)=>!v && Math.abs(j-i)===1);
+   if(target<0){
+    document.getElementById("bagInfo").textContent="बाघका लागि खाली छेउको घर छैन।";
     return;
    }
-
-   const room=snapshot.val();
-   const players=room.players || {};
-   const area=document.getElementById("players");
-   area.innerHTML="";
-
-   Object.values(players).forEach(player=>{
-    const div=document.createElement("div");
-    div.className="player";
-    div.textContent="👤 "+player.name;
-    area.appendChild(div);
-   });
-
-   const count=Object.keys(players).length;
-   document.getElementById("playerCount").textContent=
-    count+" / 4 Players";
-
-   document.getElementById("currentGame").textContent=
-    room.game || "Waiting for game selection";
-
-   if(room.game)gameSelect.value=room.game;
-  },
-  error=>{
-   document.getElementById("roomMessage").textContent=
-    "Room error: "+error.message;
+   board[i]="";board[target]="🐅";goatTurn=true;selected=-1;
+   document.getElementById("bagInfo").textContent="बाख्राको पालो";
   }
- );
+  if(goats>=20)document.getElementById("bagInfo").textContent="बाख्रा राख्ने चरण पूरा भयो!";
+  draw();
+ }
 }
 
-window.createRoom=async function(){
- if(!user){
-  alert("Firebase connection भएको छैन");
-  return;
- }
-
- try{
-  const code=makeCode();
-  const player={
-   name:getName(),
-   joinedAt:Date.now()
-  };
-
-  await set(ref(db,"rooms/"+code),{
-   host:user.uid,
-   game:selectedGame,
-   status:"waiting",
-   createdAt:Date.now(),
-   players:{
-    [user.uid]:player
-   }
+function carrom(c){
+ c.innerHTML=`<h3>🔴 CARROM MINI</h3>
+ <p>बोर्डमा ट्याप गरेर गोटी चलाउनुहोस्।</p>
+ <canvas id="carromCanvas" width="330" height="330"></canvas>
+ <button onclick="resetCarrom()">Reset Board</button>`;
+ const cv=document.getElementById("carromCanvas");
+ const ctx=cv.getContext("2d");
+ let striker={x:165,y:270,vx:0,vy:0};
+ let coins=[{x:165,y:165,r:12},{x:145,y:165,r:10},{x:185,y:165,r:10},
+ {x:165,y:145,r:10},{x:165,y:185,r:10}];
+ function draw(){
+  ctx.clearRect(0,0,330,330);
+  ctx.strokeStyle="#6c3515";ctx.lineWidth=5;
+  ctx.strokeRect(15,15,300,300);
+  coins.forEach((p,i)=>{
+   ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+   ctx.fillStyle=i===0?"#d83232":"#f4e6c4";ctx.fill();
   });
-
-  showRoom(code);
-  document.getElementById("roomMessage").textContent=
-   "Room created successfully!";
- }catch(error){
-  alert("Room बनाउन सकिएन: "+error.message);
+  ctx.beginPath();ctx.arc(striker.x,striker.y,15,0,Math.PI*2);
+  ctx.fillStyle="#254baf";ctx.fill();
  }
-};
-
-window.joinRoom=async function(){
- if(!user){
-  alert("Firebase connection भएको छैन");
-  return;
+ cv.onclick=e=>{
+  const r=cv.getBoundingClientRect();
+  const x=(e.clientX-r.left)*330/r.width;
+  const y=(e.clientY-r.top)*330/r.height;
+  striker.vx=(x-striker.x)*.08;
+  striker.vy=(y-striker.y)*.08;
+  document.getElementById("status").textContent="Carrom shot!";
+ };
+ function animate(){
+  striker.x+=striker.vx;striker.y+=striker.vy;
+  striker.vx*=.96;striker.vy*=.96;
+  if(striker.x<30||striker.x>300)striker.vx*=-.7;
+  if(striker.y<30||striker.y>300)striker.vy*=-.7;
+  striker.x=Math.max(30,Math.min(300,striker.x));
+  striker.y=Math.max(30,Math.min(300,striker.y));
+  draw();requestAnimationFrame(animate);
  }
-
- const code=document.getElementById("joinCode")
-  .value.trim().toUpperCase();
-
- if(code.length!==6){
-  alert("६ अक्षरको Room Code राख्नुहोस्");
-  return;
- }
-
- try{
-  const roomRef=ref(db,"rooms/"+code);
-  const snapshot=await get(roomRef);
-
-  if(!snapshot.exists()){
-   alert("Room भेटिएन। Code जाँच गर्नुहोस्।");
-   return;
-  }
-
-  const room=snapshot.val();
-  const players=room.players || {};
-
-  if(!players[user.uid] &&
-     Object.keys(players).length>=4){
-   alert("Room भरिएको छ।");
-   return;
-  }
-
-  if(!players[user.uid]){
-   await update(ref(db,"rooms/"+code+"/players"),{
-    [user.uid]:{
-     name:getName(),
-     joinedAt:Date.now()
-    }
-   });
-  }
-
-  showRoom(code);
-  document.getElementById("roomMessage").textContent=
-   "Room joined!";
- }catch(error){
-  alert("Join गर्न सकिएन: "+error.message);
- }
-};
-
-window.selectRoomGame=async function(){
- if(!currentRoom)return;
-
- const game=gameSelect.value;
- try{
-  await update(ref(db,"rooms/"+currentRoom),{
-   game:game
-  });
-  selectedGame=game;
- }catch(error){
-  alert("Game select गर्न सकिएन: "+error.message);
- }
-};
-
-window.copyRoom=async function(){
- if(!currentRoom)return;
- try{
-  await navigator.clipboard.writeText(currentRoom);
-  alert("Room Code copied: "+currentRoom);
- }catch(error){
-  prompt("यो Room Code साथीलाई पठाउनुहोस्:",currentRoom);
- }
-};
-
-window.leaveRoom=function(){
- if(stopRoomListener){
-  stopRoomListener();
-  stopRoomListener=null;
- }
- currentRoom=null;
- document.getElementById("roomSection")
-  .classList.add("hidden");
- document.getElementById("roomMessage").textContent=
-  "You left the room. Player record may remain until cleanup.";
-};
-
-window.computerMode=function(){
- alert(
-  "Computer Mode को वास्तविक gameplay अर्को अपडेटमा जोडिनेछ।"
- );
-};
-
+ window.resetCarrom=function(){
+  striker={x:165,y:270,vx:0,vy:0};
+  coins=[{x:165,y:165,r:12},{x:145,y:165,r:10},
+  {x:185,y:165,r:10},{x:165,y:145,r:10},{x:165,y:185,r:10}];
+ };
+ draw();animate();
+}
 </script>
-
 </body>
 </html>
