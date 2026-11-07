@@ -1,50 +1,47 @@
-<section class="card-zone">
-  <h2>🃏 CARD KINGDOM</h2>
-  <p>52 Playing Cards • Animated Deck</p>
-
-  <div class="card-board">
-    <div class="card-grid" id="cardGrid"></div>
-  </div>
-
-  <div class="card-controls">
-    <button onclick="shuffleCards()">🔀 SHUFFLE</button>
-    <button onclick="dealCards()">🃏 DEAL CARDS</button>
-  </div>
-  <p id="cardCount">52 Cards Available</p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b20">
+<title>GAME KINGDOM - Card Kingdom</title>
 
 <style>
-.card-zone {
-  background:linear-gradient(135deg,#080b20,#17113b);
-  padding:22px 10px;
-  margin:20px 0;
-  border-radius:18px;
-  text-align:center;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#080b20;
   color:white;
-  overflow:hidden;
+  font-family:Arial,sans-serif;
 }
-.card-zone h2 {
-  color:#ffd700;
-  font-size:25px;
+header{
+  text-align:center;
+  padding:22px 10px;
+  background:linear-gradient(135deg,#17113b,#080b20);
 }
-.card-zone p {color:#ccc}
-
-.card-board {
-  padding:12px 4px;
+header h1{color:#ffd700;margin:0}
+.card-zone{
+  padding:20px 10px;
+  margin:15px 8px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#080b20,#17113b);
+  text-align:center;
+}
+.card-zone h2{color:#ffd700}
+.card-board{
+  padding:12px 5px;
   background:#075b3b;
   border:3px solid #c49b39;
   border-radius:16px;
 }
-
-.card-grid {
+.card-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:9px;
 }
-
-.playing-card {
+.playing-card{
+  height:125px;
   min-width:0;
-  height:120px;
   background:linear-gradient(145deg,#fff,#e8e8e8);
   border-radius:9px;
   position:relative;
@@ -54,25 +51,19 @@
   box-shadow:0 4px 9px #0008;
   font-family:Georgia,serif;
   animation:cardIn .5s ease both;
-  transition:transform .3s;
   cursor:pointer;
 }
-.playing-card:active {
-  transform:rotateY(180deg) scale(.9);
-}
-.playing-card.red {color:#e00024}
-.playing-card.black {color:#111}
-.card-rank {
+.playing-card.red{color:#e00024}
+.playing-card.black{color:#111}
+.card-rank{
   position:absolute;
   top:5px;
   left:6px;
   font-size:17px;
   font-weight:bold;
 }
-.card-suit {
-  font-size:37px;
-}
-.card-bottom {
+.card-suit{font-size:38px}
+.card-bottom{
   position:absolute;
   bottom:5px;
   right:6px;
@@ -80,42 +71,73 @@
   font-weight:bold;
   transform:rotate(180deg);
 }
-.card-controls {
+.playing-card:active{
+  transform:rotateY(180deg) scale(.9);
+}
+.controls{
   display:flex;
   gap:10px;
   justify-content:center;
   margin-top:16px;
+  flex-wrap:wrap;
 }
-.card-controls button {
+button{
   border:0;
-  padding:11px 13px;
+  padding:12px 18px;
   border-radius:9px;
   background:#ffd700;
   color:#111;
   font-weight:bold;
+  cursor:pointer;
 }
-@keyframes cardIn {
-  from {opacity:0;transform:translateY(25px) rotate(8deg)}
-  to {opacity:1;transform:translateY(0) rotate(0)}
+#cardCount{color:#ddd}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(25px) rotate(8deg)}
+  to{opacity:1;transform:translateY(0) rotate(0)}
 }
-@media(max-width:380px) {
-  .card-grid {gap:6px}
-  .playing-card {height:105px}
-  .card-suit {font-size:30px}
+@media(max-width:380px){
+  .card-grid{gap:6px}
+  .playing-card{height:105px}
+  .card-suit{font-size:30px}
 }
 </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎮 GAME KINGDOM</h1>
+  <p>Welcome to Card Kingdom</p>
+</header>
+
+<section class="card-zone">
+  <h2>🃏 52 PLAYING CARDS</h2>
+  <p>Shuffle • Deal • Play</p>
+
+  <div class="card-board">
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+
+  <div class="controls">
+    <button onclick="shuffleCards()">🔀 SHUFFLE</button>
+    <button onclick="dealCards()">🃏 DEAL 4</button>
+    <button onclick="resetCards()">↻ RESET</button>
+  </div>
+
+  <p id="cardCount">52 Cards Available</p>
+</section>
 
 <script>
-const suits = [
+const suits=[
   {symbol:"♥",color:"red"},
   {symbol:"♦",color:"red"},
   {symbol:"♣",color:"black"},
   {symbol:"♠",color:"black"}
 ];
 
-const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+const ranks=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 
-let deck = [];
+let deck=[];
 
 function makeDeck(){
   deck=[];
@@ -165,10 +187,18 @@ function dealCards(){
   showCards();
   if(deck.length===0){
     document.getElementById("cardCount").textContent=
-      "All cards dealt! Refresh to start again.";
+      "All cards dealt! Press RESET.";
   }
+}
+
+function resetCards(){
+  makeDeck();
+  showCards();
 }
 
 makeDeck();
 showCards();
 </script>
+
+</body>
+</html>
