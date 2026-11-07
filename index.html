@@ -1,307 +1,632 @@
-
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#071b50">
-<title>GAME KINGDOM</title>
+<meta name="theme-color" content="#080b20">
+<title>GAME KINGDOM ONLINE</title>
+
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
- margin:0;color:#fff;font-family:Arial,sans-serif;
- background:radial-gradient(circle at top,#174a9c,#07112e 65%,#030817);
- min-height:100vh
+ background:#080b20;
+ color:white;
+ font-family:Arial,sans-serif;
+ overflow-x:hidden;
 }
-header{text-align:center;padding:25px 12px 15px}
-.crown{font-size:38px}
-h1{margin:5px;color:#ffd76a;font-size:30px;letter-spacing:2px}
-header p{color:#c8d8ff;margin:7px}
-.section{padding:12px 15px}
-.section h2{color:#ffda72;font-size:19px}
-.profile{
- background:#102b60;border:1px solid #d9ae4c;
- border-radius:15px;padding:14px;margin:10px 0 18px
+
+header{
+ text-align:center;
+ padding:22px 10px;
+ background:linear-gradient(120deg,#172b64,#080b20);
+ border-bottom:2px solid gold;
 }
-input{
- width:100%;padding:12px;border:0;border-radius:9px;
- margin:8px 0;background:#fff;color:#111;font-size:16px
+
+.logo{font-size:42px}
+header h1{
+ color:#ffd65c;
+ font-size:28px;
+ letter-spacing:2px;
+ margin:8px;
 }
-button{
- border:0;border-radius:9px;padding:11px 16px;
- background:linear-gradient(135deg,#ffe28b,#d89c25);
- color:#17234b;font-weight:bold;cursor:pointer
+
+header p{color:#aaa}
+
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ padding:15px;
 }
-.games{
- display:flex;gap:14px;overflow-x:auto;
- padding:10px 3px 20px;scroll-snap-type:x mandatory;
- -webkit-overflow-scrolling:touch;scrollbar-width:none
+
+.sound{
+ border:0;
+ background:gold;
+ padding:9px 14px;
+ border-radius:20px;
+ font-weight:bold;
 }
-.games::-webkit-scrollbar{display:none}
+
+.hero{
+ margin:10px;
+ padding:35px 12px;
+ text-align:center;
+ border:1px solid gold;
+ border-radius:18px;
+ background:linear-gradient(135deg,#192c65,#080b20,#49330b);
+}
+
+.hero h2{
+ color:#ffdc69;
+ font-size:25px;
+ margin-bottom:12px;
+}
+
+.section-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:25px 15px 12px;
+}
+
+.section-title h2{
+ color:#ffd65c;
+ font-size:20px;
+}
+
+.slider-buttons button{
+ padding:7px 12px;
+ background:gold;
+ border:0;
+ border-radius:7px;
+ font-size:18px;
+}
+
+.slider{
+ display:flex;
+ gap:15px;
+ overflow-x:auto;
+ padding:15px;
+ scroll-behavior:smooth;
+ scroll-snap-type:x mandatory;
+}
+
+.slider::-webkit-scrollbar{display:none}
+
 .game{
- flex:0 0 72%;max-width:245px;min-height:190px;
- scroll-snap-align:center;position:relative;overflow:hidden;
- border:1px solid #e8c35f;border-radius:20px;
- background:linear-gradient(145deg,#173f83,#091638);
- box-shadow:0 8px 22px #0008;text-align:center;
- padding:20px 12px;cursor:pointer;
- transition:.25s
+ flex:0 0 155px;
+ min-height:185px;
+ background:linear-gradient(145deg,#1d3067,#101329);
+ border:1px solid #b58b30;
+ border-radius:16px;
+ text-align:center;
+ padding:14px 8px;
+ scroll-snap-align:start;
 }
-.game:active{transform:scale(.96)}
-.game .emoji{font-size:58px;display:block;margin:8px}
+
+.game-icon{
+ font-size:48px;
+ margin:15px;
+}
+
 .game h3{
- color:#ffe08a;font-size:19px;
- animation:glow 1.8s infinite alternate
+ color:#ffd65c;
+ font-size:15px;
 }
-.game p{font-size:12px;color:#c9d8ff}
-@keyframes glow{
- from{text-shadow:0 0 3px #ffcf55}
- to{text-shadow:0 0 15px #ffd45d,0 0 25px #e9a52c}
+
+.game small{
+ display:block;
+ color:#aaa;
+ margin:8px;
 }
-.game:after{
- content:"";position:absolute;width:100px;height:100px;
- background:#ffffff0c;border-radius:50%;top:-35px;right:-25px
+
+.play{
+ border:0;
+ background:linear-gradient(90deg,#d49b22,#ffe17a);
+ color:#111;
+ padding:9px 20px;
+ border-radius:20px;
+ font-weight:bold;
+ margin-top:8px;
 }
-.slidehint{text-align:center;color:#b8caff;font-size:12px}
-.panel{
- display:none;margin:15px;padding:16px;
- background:#102653;border:1px solid #d7b65d;
- border-radius:18px;text-align:center
+
+/* REALISTIC CARD DESIGN */
+
+.card-stage{
+ height:125px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ position:relative;
+ perspective:600px;
 }
-.panel h2{color:#ffdc7d}
-.back{background:#dce8ff;color:#102653;margin-bottom:12px}
-.status{color:#ffe08a;min-height:28px;margin:12px}
-.board{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:5px;max-width:300px;margin:15px auto
+
+.playing-card{
+ width:65px;
+ height:94px;
+ background:linear-gradient(145deg,#fff,#e7e7e7);
+ border-radius:7px;
+ position:absolute;
+ color:#d51b2a;
+ box-shadow:0 5px 12px #0009;
+ border:1px solid #ddd;
+ padding:5px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ font-family:Georgia,serif;
+ font-weight:bold;
+ animation:floatCard 2.5s ease-in-out infinite;
 }
-.cell{
- background:#e8d39a;color:#17234b;border-radius:8px;
- min-height:55px;display:grid;place-items:center;
- font-size:22px;font-weight:bold;cursor:pointer
+
+.playing-card.black{color:#111}
+
+.playing-card .rank{font-size:19px}
+.playing-card .suit{
+ font-size:28px;
+ text-align:center;
 }
-.ludoBoard{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:5px;max-width:300px;margin:15px auto
+
+.playing-card .bottom{
+ transform:rotate(180deg);
 }
-.ludoCell{
- height:55px;background:#e5d6a9;color:#18234c;
- border-radius:8px;display:grid;place-items:center;font-size:21px
+
+.playing-card:nth-child(1){
+ transform:translateX(-35px) rotate(-17deg);
+ animation-delay:0s;
 }
-canvas{
- width:100%;max-width:330px;background:#c58b43;
- border:8px solid #e9cf8d;border-radius:50%;
- display:block;margin:15px auto;touch-action:manipulation
+
+.playing-card:nth-child(2){
+ transform:translateY(-10px);
+ z-index:2;
+ animation-delay:.3s;
 }
-footer{text-align:center;padding:25px 10px;color:#b7caff;font-size:13px}
+
+.playing-card:nth-child(3){
+ transform:translateX(35px) rotate(17deg);
+ animation-delay:.6s;
+}
+
+@keyframes floatCard{
+ 0%,100%{margin-top:0}
+ 50%{margin-top:-12px}
+}
+
+@keyframes shuffle{
+ 0%{transform:translateX(0) rotate(0)}
+ 25%{transform:translateX(-12px) rotate(-12deg)}
+ 50%{transform:translateX(12px) rotate(12deg)}
+ 75%{transform:translateX(-5px) rotate(-5deg)}
+ 100%{transform:translateX(0) rotate(0)}
+}
+
+.card-stage:hover .playing-card{
+ animation:shuffle .8s ease;
+}
+
+.card-stage:active .playing-card{
+ animation:flip .7s ease;
+}
+
+@keyframes flip{
+ 0%{transform:rotateY(0)}
+ 50%{transform:rotateY(90deg)}
+ 100%{transform:rotateY(0)}
+}
+
+.card-game{
+ background:linear-gradient(145deg,#192b59,#0c1027);
+}
+
+.info{
+ margin:15px;
+ padding:20px;
+ background:#111a38;
+ border:1px solid #293d72;
+ border-radius:15px;
+}
+
+.info h2{
+ color:#ffd65c;
+ margin-bottom:10px;
+}
+
+.info p{
+ color:#bbb;
+ line-height:1.7;
+}
+
+footer{
+ text-align:center;
+ padding:25px 10px;
+ margin-top:25px;
+ border-top:1px solid #57451e;
+ color:#aaa;
+}
+
+footer strong{color:#ffd65c}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#050816f5;
+ z-index:99;
+ padding:20px;
+}
+
+.modal-content{
+ max-width:400px;
+ margin:70px auto;
+ padding:25px;
+ background:#131d40;
+ border:1px solid gold;
+ border-radius:18px;
+ text-align:center;
+}
+
+.modal h2{
+ color:#ffd65c;
+ margin-bottom:15px;
+}
+
+.modal p{color:#ddd;line-height:1.7}
+
+.close{
+ background:gold;
+ border:0;
+ padding:10px 25px;
+ border-radius:20px;
+ margin-top:20px;
+ font-weight:bold;
+}
+
+@media(min-width:700px){
+ .game{flex-basis:180px}
+}
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="crown">👑</div>
+ <div class="logo">👑🎮</div>
  <h1>GAME KINGDOM</h1>
- <p>THE ROYAL WORLD OF GAMES</p>
+ <p>खेलको आफ्नै साम्राज्य</p>
 </header>
 
-<div class="section">
- <div class="profile">
-  <b>🎮 Player Profile</b>
-  <input id="playerName" placeholder="आफ्नो नाम लेख्नुहोस्">
-  <button onclick="saveName()">Save Name</button>
-  <p id="welcome">Welcome to Game Kingdom!</p>
+<div class="topbar">
+ <span>🏆 WELCOME PLAYERS</span>
+ <button class="sound" id="soundBtn" onclick="toggleSound()">
+ 🔊 SOUND ON
+ </button>
+</div>
+
+<section class="hero" id="hero">
+ <h2>👑 ENTER THE KINGDOM 👑</h2>
+ <p>Play • Enjoy • Challenge • Win</p>
+</section>
+
+<div class="section-title">
+ <h2>🔥 POPULAR GAMES</h2>
+ <div class="slider-buttons">
+ <button onclick="move('mainSlider',-1)">❮</button>
+ <button onclick="move('mainSlider',1)">❯</button>
  </div>
-
- <h2>👑 KINGDOM GAME COLLECTION</h2>
- <p class="slidehint">गेम हेर्न दायाँ-बायाँ Slide गर्नुहोस् ⬅️ ➡️</p>
- <div class="games" id="games"></div>
 </div>
 
-<div class="panel" id="gamePanel">
- <button class="back" onclick="closeGame()">← Back to Kingdom</button>
- <h2 id="gameTitle">Game</h2>
- <div id="gameContent"></div>
- <div class="status" id="status"></div>
+<div class="slider" id="mainSlider">
+
+<div class="game" onclick="openGame('LUDO KING')">
+ <div class="game-icon">🎲</div>
+ <h3>LUDO KING</h3>
+ <small>Dice Challenge</small>
+ <button class="play">PLAY</button>
 </div>
+
+<div class="game" onclick="openGame('BAGH-CHAL')">
+ <div class="game-icon">🐅</div>
+ <h3>BAGH-CHAL</h3>
+ <small>Tiger vs Goats</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game" onclick="openGame('CARROM')">
+ <div class="game-icon">🎯</div>
+ <h3>CARROM</h3>
+ <small>Board Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game" onclick="openGame('QUIZ ARENA')">
+ <div class="game-icon">🧠</div>
+ <h3>QUIZ ARENA</h3>
+ <small>Brain Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+</div>
+
+<div class="section-title">
+ <h2>🃏 CARD GAME KINGDOM</h2>
+ <div class="slider-buttons">
+ <button onclick="move('cardSlider',-1)">❮</button>
+ <button onclick="move('cardSlider',1)">❯</button>
+ </div>
+</div>
+
+<div class="slider" id="cardSlider">
+
+<div class="game card-game" onclick="openGame('CALL BREAK')">
+ <div class="card-stage">
+  <div class="playing-card">
+   <span class="rank">K</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">K ♥</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">Q</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">Q ♠</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">A</span>
+   <span class="suit">♦</span>
+   <span class="rank bottom">A ♦</span>
+  </div>
+ </div>
+ <h3>CALL BREAK</h3>
+ <small>♠ Card Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('MARRIAGE')">
+ <div class="card-stage">
+  <div class="playing-card">
+   <span class="rank">A</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">A ♥</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">K</span>
+   <span class="suit">♣</span>
+   <span class="rank bottom">K ♣</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">Q</span>
+   <span class="suit">♦</span>
+   <span class="rank bottom">Q ♦</span>
+  </div>
+ </div>
+ <h3>MARRIAGE</h3>
+ <small>Card Collection</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('RUMMY')">
+ <div class="card-stage">
+  <div class="playing-card black">
+   <span class="rank">A</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">A ♠</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">K</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">K ♥</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">J</span>
+   <span class="suit">♣</span>
+   <span class="rank bottom">J ♣</span>
+  </div>
+ </div>
+ <h3>RUMMY</h3>
+ <small>Card Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('29 CARD GAME')">
+ <div class="card-stage">
+  <div class="playing-card">
+   <span class="rank">J</span>
+   <span class="suit">♦</span>
+   <span class="rank bottom">J ♦</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">9</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">9 ♠</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">A</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">A ♥</span>
+  </div>
+ </div>
+ <h3>29 CARD GAME</h3>
+ <small>Team Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('TEEN PATTI')">
+ <div class="card-stage">
+  <div class="playing-card">
+   <span class="rank">A</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">A ♥</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">A</span>
+   <span class="suit">♦</span>
+   <span class="rank bottom">A ♦</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">A</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">A ♠</span>
+  </div>
+ </div>
+ <h3>TEEN PATTI</h3>
+ <small>Card Game</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('GIN RUMMY')">
+ <div class="card-stage">
+  <div class="playing-card black">
+   <span class="rank">K</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">K ♠</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">Q</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">Q ♥</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">A</span>
+   <span class="suit">♣</span>
+   <span class="rank bottom">A ♣</span>
+  </div>
+ </div>
+ <h3>GIN RUMMY</h3>
+ <small>Card Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('DHUMBAL')">
+ <div class="card-stage">
+  <div class="playing-card black">
+   <span class="rank">9</span>
+   <span class="suit">♠</span>
+   <span class="rank bottom">9 ♠</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">8</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">8 ♥</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">7</span>
+   <span class="suit">♣</span>
+   <span class="rank bottom">7 ♣</span>
+  </div>
+ </div>
+ <h3>DHUMBAL</h3>
+ <small>Card Challenge</small>
+ <button class="play">PLAY</button>
+</div>
+
+<div class="game card-game" onclick="openGame('KITTY')">
+ <div class="card-stage">
+  <div class="playing-card">
+   <span class="rank">K</span>
+   <span class="suit">♥</span>
+   <span class="rank bottom">K ♥</span>
+  </div>
+  <div class="playing-card">
+   <span class="rank">J</span>
+   <span class="suit">♦</span>
+   <span class="rank bottom">J ♦</span>
+  </div>
+  <div class="playing-card black">
+   <span class="rank">Q</span>
+   <span class="suit">♣</span>
+   <span class="rank bottom">Q ♣</span>
+  </div>
+ </div>
+ <h3>KITTY</h3>
+ <small>Card Game</small>
+ <button class="play">PLAY</button>
+</div>
+
+</div>
+
+<section class="info">
+ <h2>👑 GAME KINGDOM</h2>
+ <p>
+ Welcome to Game Kingdom Online.
+ Explore games and enjoy the gaming experience.
+ </p>
+</section>
+
+<section class="info">
+ <h2>👤 DEVELOPER</h2>
+ <p>Developed with ❤️ by <strong>Dilip Rimal</strong></p>
+</section>
 
 <footer>
- 👑 GAME KINGDOM 👑<br><br>
- Developed by <b>Dilip Rimal</b><br>
- © 2026 Game Kingdom
+ <p>👑 GAME KINGDOM ONLINE</p>
+ <p style="margin-top:8px">© 2026 All Rights Reserved</p>
+ <p style="margin-top:8px">Developed by <strong>Dilip Rimal</strong></p>
 </footer>
 
+<div class="modal" id="gameModal">
+ <div class="modal-content">
+  <h2 id="gameName"></h2>
+  <p id="gameMessage"></p>
+  <button class="close" onclick="closeGame()">CLOSE</button>
+ </div>
+</div>
+
 <script>
-const gameList=[
- ["Ludo","🎲","Play Ludo"],
- ["Bagchal","🐅","Tiger & Goat"],
- ["Carrom","🔴","Carrom Board"],
- ["Call Break","🃏","Card Game"],
- ["Marriage","🎴","Marriage Card"],
- ["Rummy","♠️","Rummy Cards"],
- ["29 Card Game","♦️","Twenty Nine"],
- ["Teen Patti","🎰","Teen Patti"],
- ["Poker","♣️","Poker Cards"],
- ["Gin Rummy","🂡","Gin Rummy"],
- ["Dhumbal","🎴","Dhumbal Cards"],
- ["Kitty","🃏","Kitty Card Game"]
+let soundOn=true;
+
+function beep(){
+ if(!soundOn)return;
+ try{
+  let audio=new(window.AudioContext||window.webkitAudioContext)();
+  let oscillator=audio.createOscillator();
+  let gain=audio.createGain();
+  oscillator.connect(gain);
+  gain.connect(audio.destination);
+  oscillator.frequency.value=550;
+  gain.gain.value=.04;
+  oscillator.start();
+  oscillator.stop(audio.currentTime+.12);
+ }catch(e){}
+}
+
+function toggleSound(){
+ soundOn=!soundOn;
+ document.getElementById("soundBtn").innerText=
+ soundOn?"🔊 SOUND ON":"🔇 SOUND OFF";
+ beep();
+}
+
+function move(id,d){
+ document.getElementById(id).scrollBy({
+  left:d*320,
+  behavior:"smooth"
+ });
+ beep();
+}
+
+function openGame(name){
+ beep();
+ document.getElementById("gameName").innerText="👑 "+name;
+ document.getElementById("gameMessage").innerText=
+ "Welcome to "+name+"! Gameplay module will be added in the next update.";
+ document.getElementById("gameModal").style.display="block";
+}
+
+function closeGame(){
+ document.getElementById("gameModal").style.display="none";
+}
+
+let slides=[
+ "👑 ENTER THE KINGDOM 👑",
+ "🎮 PLAY YOUR FAVOURITE GAME",
+ "🏆 WELCOME CHAMPIONS"
 ];
 
-const games=document.getElementById("games");
-gameList.forEach((g,i)=>{
- const card=document.createElement("div");
- card.className="game";
- card.innerHTML=`<span class="emoji">${g[1]}</span>
- <h3>${g[0]}</h3><p>${g[2]}</p><button>PLAY NOW</button>`;
- card.onclick=()=>openGame(g[0]);
- games.appendChild(card);
-});
-
-function saveName(){
- const n=document.getElementById("playerName").value.trim();
- if(!n)return alert("नाम लेख्नुहोस्");
- localStorage.setItem("kingdomName",n);
- document.getElementById("welcome").textContent="Welcome, "+n+"! 👑";
-}
-const saved=localStorage.getItem("kingdomName");
-if(saved){
- document.getElementById("playerName").value=saved;
- document.getElementById("welcome").textContent="Welcome, "+saved+"! 👑";
-}
-
-let currentGame="";
-function openGame(name){
- currentGame=name;
- document.getElementById("gamePanel").style.display="block";
- document.getElementById("gameTitle").textContent="👑 "+name;
- document.getElementById("status").textContent="";
- const c=document.getElementById("gameContent");
- c.innerHTML="";
- document.getElementById("gamePanel").scrollIntoView({behavior:"smooth"});
- if(name==="Ludo")ludo(c);
- else if(name==="Bagchal")bagchal(c);
- else if(name==="Carrom")carrom(c);
- else c.innerHTML=`<h3>${name}</h3>
- <p>यो गेमको पूरा gameplay निर्माण हुँदैछ।</p>
- <p>GAME KINGDOM मा छिट्टै उपलब्ध हुनेछ।</p> 🎮`;
-}
-function closeGame(){
- document.getElementById("gamePanel").style.display="none";
- document.getElementById("gameContent").innerHTML="";
-}
-
-function ludo(c){
- let pos=0,turn=0;
- c.innerHTML=`<h3>🎲 LUDO MINI</h3>
- <p>Dice फाल्नुहोस् र आफ्नो गोटी अगाडि बढाउनुहोस्।</p>
- <div class="ludoBoard" id="ludoBoard"></div>
- <button onclick="rollLudo()">🎲 Roll Dice</button>
- <div class="status" id="ludoStatus">तपाईंको पालो</div>`;
- drawLudo();
- function drawLudo(){
-  const b=document.getElementById("ludoBoard");
-  b.innerHTML="";
-  for(let i=0;i<16;i++){
-   const d=document.createElement("div");
-   d.className="ludoCell";
-   d.textContent=i===pos?"🔴":(i===15?"🏁":"");
-   b.appendChild(d);
-  }
- }
- window.rollLudo=function(){
-  const dice=Math.floor(Math.random()*6)+1;
-  pos+=dice;
-  if(pos>=15)pos=15;
-  document.getElementById("ludoStatus").textContent=
-   "तपाईंले "+dice+" पाउनुभयो! स्थान: "+pos;
-  drawLudo();
-  if(pos===15)document.getElementById("ludoStatus").textContent="🏆 तपाईं विजेता!";
- };
-}
-
-function bagchal(c){
- let board=Array(25).fill("");
- board[0]="🐅";board[4]="🐅";board[20]="🐅";board[24]="🐅";
- let goats=0,selected=-1,goatTurn=true;
- c.innerHTML=`<h3>🐅 BAGCHAL MINI</h3>
- <p>बाख्रा राख्नुहोस्, बाघलाई रोक्नुहोस्।</p>
- <div class="board" id="bagBoard"></div>
- <p id="bagInfo">बाख्राको पालो: खाली घर छान्नुहोस्</p>`;
- draw();
- function draw(){
-  const b=document.getElementById("bagBoard");b.innerHTML="";
-  board.forEach((v,i)=>{
-   const d=document.createElement("div");d.className="cell";
-   d.textContent=v||"·";
-   d.style.outline=selected===i?"3px solid #ffcf55":"none";
-   d.onclick=()=>tap(i);b.appendChild(d);
-  });
- }
- function tap(i){
-  if(goatTurn){
-   if(board[i])return;
-   board[i]="🐐";goats++;goatTurn=false;
-   document.getElementById("bagInfo").textContent="बाघको पालो: बाघ छान्नुहोस्";
-  }else{
-   if(board[i]!=="🐅")return;
-   selected=i;draw();
-   const target=board.findIndex((v,j)=>!v && Math.abs(j-i)===1);
-   if(target<0){
-    document.getElementById("bagInfo").textContent="बाघका लागि खाली छेउको घर छैन।";
-    return;
-   }
-   board[i]="";board[target]="🐅";goatTurn=true;selected=-1;
-   document.getElementById("bagInfo").textContent="बाख्राको पालो";
-  }
-  if(goats>=20)document.getElementById("bagInfo").textContent="बाख्रा राख्ने चरण पूरा भयो!";
-  draw();
- }
-}
-
-function carrom(c){
- c.innerHTML=`<h3>🔴 CARROM MINI</h3>
- <p>बोर्डमा ट्याप गरेर गोटी चलाउनुहोस्।</p>
- <canvas id="carromCanvas" width="330" height="330"></canvas>
- <button onclick="resetCarrom()">Reset Board</button>`;
- const cv=document.getElementById("carromCanvas");
- const ctx=cv.getContext("2d");
- let striker={x:165,y:270,vx:0,vy:0};
- let coins=[{x:165,y:165,r:12},{x:145,y:165,r:10},{x:185,y:165,r:10},
- {x:165,y:145,r:10},{x:165,y:185,r:10}];
- function draw(){
-  ctx.clearRect(0,0,330,330);
-  ctx.strokeStyle="#6c3515";ctx.lineWidth=5;
-  ctx.strokeRect(15,15,300,300);
-  coins.forEach((p,i)=>{
-   ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-   ctx.fillStyle=i===0?"#d83232":"#f4e6c4";ctx.fill();
-  });
-  ctx.beginPath();ctx.arc(striker.x,striker.y,15,0,Math.PI*2);
-  ctx.fillStyle="#254baf";ctx.fill();
- }
- cv.onclick=e=>{
-  const r=cv.getBoundingClientRect();
-  const x=(e.clientX-r.left)*330/r.width;
-  const y=(e.clientY-r.top)*330/r.height;
-  striker.vx=(x-striker.x)*.08;
-  striker.vy=(y-striker.y)*.08;
-  document.getElementById("status").textContent="Carrom shot!";
- };
- function animate(){
-  striker.x+=striker.vx;striker.y+=striker.vy;
-  striker.vx*=.96;striker.vy*=.96;
-  if(striker.x<30||striker.x>300)striker.vx*=-.7;
-  if(striker.y<30||striker.y>300)striker.vy*=-.7;
-  striker.x=Math.max(30,Math.min(300,striker.x));
-  striker.y=Math.max(30,Math.min(300,striker.y));
-  draw();requestAnimationFrame(animate);
- }
- window.resetCarrom=function(){
-  striker={x:165,y:270,vx:0,vy:0};
-  coins=[{x:165,y:165,r:12},{x:145,y:165,r:10},
-  {x:185,y:165,r:10},{x:165,y:145,r:10},{x:165,y:185,r:10}];
- };
- draw();animate();
-}
+let i=0;
+setInterval(()=>{
+ i=(i+1)%slides.length;
+ document.querySelector(".hero h2").innerText=slides[i];
+},3500);
 </script>
+
 </body>
 </html>
