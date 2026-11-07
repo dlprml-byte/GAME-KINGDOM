@@ -1,243 +1,773 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#071a17">
 <title>CALL BREAK | GAME KINGDOM</title>
+
 <style>
 *{box-sizing:border-box}
+
+html,body{
+ margin:0;width:100%;height:100%;
+ overflow:hidden;
+ font-family:Arial,sans-serif;
+ background:#06130f;color:white;
+}
+
 body{
- margin:0;background:radial-gradient(circle,#155b42,#031c16);
- color:white;font-family:Arial,sans-serif;text-align:center;
+ display:flex;
+ flex-direction:column;
 }
-header{padding:12px;background:#071b16;font-size:23px;font-weight:bold;color:#ffd66b}
-.info{display:flex;justify-content:space-around;padding:10px;font-size:13px}
-.players{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px}
-.player{background:#123d30;border:1px solid #d5b45d;border-radius:10px;padding:9px;font-size:13px}
-.table{
- margin:12px auto;width:94%;height:240px;max-width:420px;
- border:3px solid #d5b45d;border-radius:50%;
- background:radial-gradient(#18754e,#06412e);
- display:flex;align-items:center;justify-content:center;
- position:relative;
+
+header{
+ height:52px;
+ flex-shrink:0;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 12px;
+ background:#091d18;
+ border-bottom:1px solid #c9a34a;
 }
-.played{position:absolute;width:62px;height:88px;background:white;color:#111;
- border-radius:7px;display:flex;align-items:center;justify-content:center;
- font-size:24px;font-weight:bold;box-shadow:0 3px 8px #000}
-.p0{bottom:12px;left:calc(50% - 31px)}
-.p1{top:12px;left:calc(50% - 31px)}
-.p2{right:12px;top:calc(50% - 44px)}
-.p3{left:12px;top:calc(50% - 44px)}
-.center{font-size:13px;color:#ffe69a}
-.hand{
- display:flex;justify-content:center;flex-wrap:wrap;
- gap:3px;padding:12px 5px 5px;
+
+.logo{
+ color:#f6d477;
+ font-size:17px;
+ font-weight:900;
+ letter-spacing:1px;
 }
-.card{
- width:clamp(37px,10.5vw,49px);height:72px;background:white;
- border-radius:6px;color:#111;border:1px solid #aaa;
- display:flex;align-items:center;justify-content:center;
- font-size:17px;font-weight:bold;cursor:pointer;
- box-shadow:0 2px 4px #000;
-}
-.red{color:#d50000}
-.card.selected{transform:translateY(-12px);border:3px solid #ffbd35}
+
 button{
- border:0;border-radius:8px;padding:11px 16px;margin:5px;
- background:#ffcc55;color:#14251d;font-weight:bold;
+ border:0;
+ cursor:pointer;
+ font-weight:bold;
 }
-#status{padding:8px;color:#ffe49a;min-height:25px}
-#bidBox{padding:10px}
-#score{font-size:13px;padding:8px}
+
+.score-btn{
+ background:linear-gradient(135deg,#f8dc83,#b8862c);
+ color:#17251a;
+ border-radius:8px;
+ padding:9px 17px;
+ font-size:13px;
+}
+
+.table{
+ flex:1;
+ min-height:0;
+ margin:7px;
+ border:4px solid #a67c32;
+ border-radius:100px;
+ background:
+ radial-gradient(ellipse,#176b45 0%,#075033 65%,#063523 100%);
+ box-shadow:inset 0 0 35px #001c12;
+ position:relative;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:space-between;
+ padding:8px 5px;
+}
+
+.players{
+ width:100%;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ gap:3px;
+}
+
+.player{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ padding:2px;
+ min-width:55px;
+}
+
+.avatar{
+ width:25px;
+ height:25px;
+ border-radius:50%;
+ background:#f5e2b9;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:14px;
+ border:1px solid #e5c36b;
+}
+
+.player-name{
+ font-size:9px;
+ font-weight:bold;
+ margin-top:2px;
+}
+
+.bid{
+ font-size:10px;
+ color:#ffdf83;
+ font-weight:bold;
+}
+
+.active{
+ background:#d8b34e;
+ border-radius:7px;
+}
+
+.center{
+ width:100%;
+ flex:1;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ position:relative;
+ min-height:100px;
+}
+
+.trick{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:7px;
+ flex-wrap:wrap;
+}
+
+.played{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ animation:cardIn .25s ease;
+}
+
+.played small{
+ font-size:9px;
+ margin-bottom:3px;
+ color:#ffe39a;
+}
+
+.played .card{
+ width:42px;
+ height:61px;
+ font-size:20px;
+}
+
+.card{
+ width:42px;
+ height:61px;
+ border-radius:6px;
+ background:#fff;
+ color:#111;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ font-weight:bold;
+ box-shadow:0 2px 5px #001b11;
+ border:1px solid #ddd;
+ flex-shrink:0;
+ position:relative;
+ transition:.15s;
+}
+
+.card.red{color:#d71935}
+
+.card .suit{
+ font-size:20px;
+}
+
+.card .rank{
+ font-size:14px;
+}
+
+.my-area{
+ width:100%;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:5px;
+}
+
+.my-info{
+ display:flex;
+ align-items:center;
+ gap:6px;
+}
+
+.my-cards{
+ display:flex;
+ width:100%;
+ overflow-x:auto;
+ overflow-y:hidden;
+ justify-content:flex-start;
+ gap:3px;
+ padding:5px 4px 10px;
+ scrollbar-width:thin;
+ scrollbar-color:#d7b354 transparent;
+}
+
+.my-cards .card{
+ width:clamp(38px,9vw,49px);
+ height:69px;
+ cursor:pointer;
+}
+
+.my-cards .card:active{
+ transform:translateY(-12px);
+}
+
+.my-cards .card:hover{
+ transform:translateY(-7px);
+}
+
+.controls{
+ flex-shrink:0;
+ min-height:45px;
+ background:#091d18;
+ border-top:1px solid #9c7b37;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ padding:5px;
+}
+
+.control-btn{
+ padding:9px 17px;
+ border-radius:7px;
+ background:#d5ad4d;
+ color:#17251a;
+}
+
+.status{
+ color:#ffe4a0;
+ font-size:11px;
+ text-align:center;
+ padding:4px;
+}
+
+.overlay{
+ position:fixed;
+ inset:0;
+ background:#000c;
+ z-index:10;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+}
+
+.panel{
+ background:#10251c;
+ border:2px solid #d7b354;
+ border-radius:14px;
+ padding:20px;
+ width:100%;
+ max-width:330px;
+ text-align:center;
+ box-shadow:0 0 30px #000;
+}
+
+.panel h2{
+ color:#f5d47e;
+ margin-top:0;
+}
+
+.panel button{
+ background:#d7b354;
+ color:#14241a;
+ padding:11px 20px;
+ border-radius:7px;
+ margin:6px;
+}
+
+select{
+ padding:10px;
+ border-radius:7px;
+ font-size:17px;
+}
+
+.score-row{
+ display:flex;
+ justify-content:space-between;
+ padding:8px;
+ border-bottom:1px solid #ffffff25;
+ font-size:13px;
+}
+
+@keyframes cardIn{
+ from{transform:translateY(-15px) scale(.8);opacity:0}
+ to{transform:translateY(0) scale(1);opacity:1}
+}
+
+@media(max-height:650px){
+ header{height:43px}
+ .table{margin:4px}
+ .avatar{width:21px;height:21px}
+ .my-cards .card{height:57px}
+ .card{height:54px}
+ .controls{min-height:38px}
+}
 </style>
 </head>
+
 <body>
 
-<header>🃏 GAME KINGDOM</header>
-<div class="info">
- <span>Round: <b id="round">1</b>/5</span>
- <span>Trump: ♠ Spade</span>
- <span>Turn: <b id="turn">You</b></span>
-</div>
-
-<div class="players">
- <div class="player">🤖 Computer 1<br>Bid: <span id="b1">-</span></div>
- <div class="player">🤖 Computer 2<br>Bid: <span id="b2">-</span></div>
- <div class="player">🤖 Computer 3<br>Bid: <span id="b3">-</span></div>
-</div>
+<header>
+ <div class="logo">♠ GAME KINGDOM</div>
+ <button class="score-btn" onclick="showScore()">🏆 SCORE</button>
+</header>
 
 <div class="table">
- <div class="center" id="message">CALL BREAK<br>Start Game</div>
- <div id="play0" class="played p0" style="display:none"></div>
- <div id="play1" class="played p1" style="display:none"></div>
- <div id="play2" class="played p2" style="display:none"></div>
- <div id="play3" class="played p3" style="display:none"></div>
+
+ <div class="players" id="topPlayers">
+  <div class="player" id="p1">
+   <div class="avatar">👨</div>
+   <div class="player-name">PLAYER 1</div>
+   <div class="bid">Bid: -</div>
+  </div>
+
+  <div class="player" id="p2">
+   <div class="avatar">👩</div>
+   <div class="player-name">PLAYER 2</div>
+   <div class="bid">Bid: -</div>
+  </div>
+
+  <div class="player" id="p3">
+   <div class="avatar">👨</div>
+   <div class="player-name">PLAYER 3</div>
+   <div class="bid">Bid: -</div>
+  </div>
+ </div>
+
+ <div class="center">
+  <div class="trick" id="trick"></div>
+ </div>
+
+ <div class="my-area">
+
+  <div class="my-info">
+   <div class="avatar">👦</div>
+   <b style="font-size:11px">YOU</b>
+   <span class="bid" id="myBid">Bid: -</span>
+  </div>
+
+  <div class="my-cards" id="myCards"></div>
+
+ </div>
+
 </div>
 
-<div id="bidBox">
- <button onclick="startGame()">🎮 NEW GAME</button>
- <div id="bidControls" style="display:none">
- <p>तपाईंको Bid छान्नुहोस्</p>
- <select id="bid" style="padding:10px;border-radius:8px">
- <option value="1">1</option><option value="2">2</option>
- <option value="3">3</option><option value="4">4</option>
- <option value="5">5</option><option value="6">6</option>
- <option value="7">7</option><option value="8">8</option>
- <option value="9">9</option><option value="10">10</option>
- <option value="11">11</option><option value="12">12</option>
- <option value="13">13</option>
- </select>
- <button onclick="confirmBid()">CONFIRM BID</button>
+<div class="status" id="status">Choose your bid to start!</div>
+
+<div class="controls">
+ <button class="control-btn" onclick="newGame()">↻ NEW GAME</button>
+</div>
+
+<!-- BID PANEL -->
+<div class="overlay" id="bidPanel">
+ <div class="panel">
+  <h2>♠ CALL BREAK</h2>
+  <p>Choose Your Bid</p>
+  <select id="bidSelect"></select>
+  <br><br>
+  <button onclick="confirmBid()">CONFIRM BID</button>
  </div>
 </div>
 
-<div id="status">NEW GAME थिचेर सुरु गर्नुहोस्।</div>
-<div id="hand" class="hand"></div>
-<button onclick="playSelected()">🃏 FALNUHOS</button>
-<button onclick="toggleSound()" id="soundBtn">🔊 SOUND ON</button>
-<div id="score">Score: 0</div>
+<!-- SCORE PANEL -->
+<div class="overlay" id="scorePanel">
+ <div class="panel">
+  <h2>🏆 GAME SCORE</h2>
+  <h3 id="roundTitle">ROUND 1 / 5</h3>
+  <div id="scoreRows"></div>
+  <br>
+  <button onclick="closeScore()">CLOSE</button>
+  <button onclick="newGame()">NEW GAME</button>
+ </div>
+</div>
+
+<!-- ROUND RESULT -->
+<div class="overlay" id="resultPanel">
+ <div class="panel">
+  <h2>ROUND COMPLETE</h2>
+  <div id="resultText"></div>
+  <button onclick="nextRound()">NEXT ROUND</button>
+ </div>
+</div>
 
 <script>
+
 const suits=['♠','♥','♦','♣'];
 const ranks=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-let hands=[],played=[],selected=null;
-let turn=0,bids=[0,0,0,0],tricks=[0,0,0,0];
-let scores=[0,0,0,0],round=1,roundTricks=0;
-let sound=true,ctx=null,started=false;
 
-function playSound(freq=500,duration=.12){
- if(!sound)return;
+let players=[];
+let deck=[];
+let round=1;
+let turn=0;
+let trick=[];
+let tricks=[0,0,0,0];
+let scores=[0,0,0,0];
+let bids=[0,0,0,0];
+let myHand=[];
+let roundOver=false;
+let busy=false;
+
+function sound(){
  try{
-  ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
-  let o=ctx.createOscillator(),g=ctx.createGain();
-  o.connect(g);g.connect(ctx.destination);
-  o.frequency.value=freq;
-  g.gain.value=.08;
-  o.start();g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);
-  o.stop(ctx.currentTime+duration);
+  let ctx=new AudioContext();
+  let osc=ctx.createOscillator();
+  let gain=ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.frequency.value=650;
+  gain.gain.value=.035;
+  osc.start();
+  osc.stop(ctx.currentTime+.07);
  }catch(e){}
 }
-function toggleSound(){
- sound=!sound;
- document.getElementById('soundBtn').textContent=sound?'🔊 SOUND ON':'🔇 SOUND OFF';
-}
-function shuffle(a){
- for(let i=a.length-1;i>0;i--){
- let j=Math.floor(Math.random()*(i+1));
- [a[i],a[j]]=[a[j],a[i]];
+
+function createDeck(){
+ deck=[];
+ for(let s of suits){
+  for(let r=0;r<ranks.length;r++){
+   deck.push({suit:s,rank:ranks[r],value:r+2});
+  }
  }
- return a;
+ for(let i=deck.length-1;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [deck[i],deck[j]]=[deck[j],deck[i]];
+ }
 }
-function startGame(){
- let deck=[];
- suits.forEach(s=>ranks.forEach((r,i)=>deck.push({s,r,v:i+2})));
- shuffle(deck);
- hands=[[],[],[],[]];
- deck.forEach((c,i)=>hands[i%4].push(c));
- hands.forEach(h=>h.sort((a,b)=>suits.indexOf(a.s)-suits.indexOf(b.s)||a.v-b.v));
- bids=[0,0,0,0];tricks=[0,0,0,0];
- played=[];selected=null;turn=0;roundTricks=0;
- started=true;
- document.getElementById('bidControls').style.display='block';
- document.getElementById('message').innerHTML='तपाईंको Bid छान्नुहोस्';
- document.getElementById('status').textContent='तपाईंले कति Trick लिनुहुन्छ?';
- for(let i=0;i<4;i++)document.getElementById('play'+i).style.display='none';
- render();
+
+function newGame(){
+ round=1;
+ scores=[0,0,0,0];
+ startRound();
 }
+
+function startRound(){
+
+ createDeck();
+
+ players=[
+  {name:'YOU',hand:[]},
+  {name:'PLAYER 1',hand:[]},
+  {name:'PLAYER 2',hand:[]},
+  {name:'PLAYER 3',hand:[]}
+ ];
+
+ tricks=[0,0,0,0];
+ bids=[0,0,0,0];
+ trick=[];
+ turn=0;
+ roundOver=false;
+ busy=false;
+
+ for(let i=0;i<13;i++){
+  for(let p=0;p<4;p++){
+   players[p].hand.push(deck.pop());
+  }
+ }
+
+ myHand=players[0].hand;
+
+ myHand.sort((a,b)=>{
+  let s=suits.indexOf(a.suit)-suits.indexOf(b.suit);
+  return s||a.value-b.value;
+ });
+
+ renderPlayers();
+ renderCards();
+
+ document.getElementById('status').innerText='Choose your bid!';
+ document.getElementById('bidPanel').style.display='flex';
+
+ let sel=document.getElementById('bidSelect');
+ sel.innerHTML='';
+ for(let i=1;i<=13;i++){
+  sel.innerHTML+=`<option value="${i}">${i}</option>`;
+ }
+}
+
+function renderPlayers(){
+
+ let ids=['p1','p2','p3'];
+
+ ids.forEach((id,i)=>{
+  let el=document.getElementById(id);
+  el.querySelector('.bid').innerText='Bid: '+(bids[i+1]||'-');
+  el.classList.remove('active');
+ });
+
+ document.getElementById('myBid').innerText='Bid: '+(bids[0]||'-');
+
+}
+
 function confirmBid(){
- bids[0]=Number(document.getElementById('bid').value);
- for(let i=1;i<4;i++)bids[i]=Math.floor(Math.random()*5)+2;
- ['b1','b2','b3'].forEach((id,i)=>document.getElementById(id).textContent=bids[i+1]);
- document.getElementById('bidControls').style.display='none';
- document.getElementById('status').textContent='तपाईंको पालो! एउटा तास छान्नुहोस्।';
- render();
+
+ bids[0]=Number(document.getElementById('bidSelect').value);
+
+ for(let i=1;i<4;i++){
+  bids[i]=Math.floor(Math.random()*5)+2;
+ }
+
+ document.getElementById('bidPanel').style.display='none';
+
+ renderPlayers();
+
+ document.getElementById('status').innerText='Your turn! Play a card.';
+
+ renderCards();
+
 }
-function cardName(c){return c.r+c.s}
-function render(){
- let box=document.getElementById('hand');box.innerHTML='';
- if(!started)return;
- hands[0].forEach((c,i)=>{
- let d=document.createElement('div');
- d.className='card '+(['♥','♦'].includes(c.s)?'red ':'')+(selected===i?'selected':'');
- d.textContent=cardName(c);
- d.onclick=()=>{if(turn===0){selected=i;render()}};
- box.appendChild(d);
+
+function renderCards(){
+
+ let box=document.getElementById('myCards');
+ box.innerHTML='';
+
+ myHand.forEach((card,i)=>{
+  let el=createCard(card);
+  el.onclick=()=>playCard(i);
+  box.appendChild(el);
  });
- document.getElementById('turn').textContent=turn===0?'You':'Computer '+turn;
- document.getElementById('score').textContent='Your Score: '+scores[0]+' | Tricks: '+tricks[0];
+
 }
-function playSelected(){
- if(!started||bids[0]===0){alert('पहिले Bid Confirm गर्नुहोस्');return}
- if(turn!==0||selected===null){alert('एउटा तास छान्नुहोस्');return}
- let c=hands[0][selected];
- hands[0].splice(selected,1);selected=null;
- putCard(0,c);
+
+function createCard(card){
+
+ let el=document.createElement('div');
+ let red=card.suit==='♥'||card.suit==='♦';
+
+ el.className='card '+(red?'red':'');
+ el.innerHTML=`<div class="rank">${card.rank}</div>
+ <div class="suit">${card.suit}</div>`;
+
+ return el;
+
 }
-function putCard(p,c){
- played.push({p,c});
- let el=document.getElementById('play'+p);
- el.style.display='flex';el.textContent=cardName(c);
- el.style.color=['♥','♦'].includes(c.s)?'red':'black';
- playSound(650,.13);
- render();
- if(played.length===4){
- setTimeout(finishTrick,900);
- }else{
+
+function playCard(index){
+
+ if(roundOver||busy||bids[0]===0)return;
+ if(turn!==0)return;
+
+ let card=myHand[index];
+
+ if(!validPlay(card,0)){
+  document.getElementById('status').innerText='Follow the same suit!';
+  return;
+ }
+
+ myHand.splice(index,1);
+ players[0].hand=myHand;
+
+ addPlay(0,card);
+ sound();
+
+ renderCards();
+
+ turn=1;
+ computerTurn();
+
+}
+
+function validPlay(card,p){
+
+ if(trick.length===0)return true;
+
+ let lead=trick[0].card.suit;
+ let hasSuit=players[p].hand.some(c=>c.suit===lead);
+
+ return !hasSuit||card.suit===lead;
+
+}
+
+function addPlay(p,card){
+
+ trick.push({player:p,card});
+
+ let names=['YOU','PLAYER 1','PLAYER 2','PLAYER 3'];
+
+ let box=document.getElementById('trick');
+
+ let item=document.createElement('div');
+ item.className='played';
+
+ item.innerHTML=`<small>${names[p]}</small>`;
+
+ item.appendChild(createCard(card));
+
+ box.appendChild(item);
+
+}
+
+function computerTurn(){
+
+ if(roundOver)return;
+
+ if(trick.length===4){
+  finishTrick();
+  return;
+ }
+
+ let p=turn;
+
+ if(p===0)return;
+
+ let hand=players[p].hand;
+
+ let lead=trick.length?trick[0].card.suit:null;
+
+ let available=hand.filter(c=>validPlay(c,p));
+
+ let chosen=available[Math.floor(Math.random()*available.length)];
+
+ let index=hand.indexOf(chosen);
+
+ hand.splice(index,1);
+
+ addPlay(p,chosen);
+ sound();
+
  turn=(p+1)%4;
- if(turn!==0)setTimeout(computerPlay,650);
- }
+
+ setTimeout(computerTurn,650);
+
 }
-function computerPlay(){
- if(played.length>=4)return;
- let h=hands[turn];
- let idx=0;
- if(played.length){
- let lead=played[0].c.s;
- let follow=h.filter(c=>c.s===lead);
- if(follow.length)idx=h.indexOf(follow[Math.floor(Math.random()*follow.length)]);
- else idx=Math.floor(Math.random()*h.length);
- }else idx=Math.floor(Math.random()*h.length);
- let c=h.splice(idx,1)[0];
- putCard(turn,c);
-}
+
 function finishTrick(){
- let lead=played[0].c.s;
- let winner=played[0];
- played.forEach(x=>{
- if((x.c.s===winner.c.s&&x.c.v>winner.c.v)||
- (x.c.s==='♠'&&winner.c.s!=='♠')||
- (x.c.s==='♠'&&winner.c.s==='♠'&&x.c.v>winner.c.v))winner=x;
- });
- tricks[winner.p]++;
- roundTricks++;
- document.getElementById('message').textContent=
- (winner.p===0?'तपाईंले':'Computer '+winner.p+' ले')+' Trick जित्नुभयो!';
- playSound(850,.2);
- played=[];
- for(let i=0;i<4;i++)document.getElementById('play'+i).style.display='none';
- turn=winner.p;
- render();
- if(roundTricks===13){
- setTimeout(endRound,700);
- }else if(turn!==0)setTimeout(computerPlay,700);
+
+ let lead=trick[0].card.suit;
+
+ let winner=trick[0].player;
+ let winningCard=trick[0].card;
+
+ for(let item of trick){
+
+  let c=item.card;
+  let better=false;
+
+  if(c.suit==='♠'&&winningCard.suit!=='♠')better=true;
+
+  else if(c.suit===winningCard.suit&&c.value>winningCard.value)better=true;
+
+  if(better){
+   winner=item.player;
+   winningCard=c;
+  }
+
+ }
+
+ tricks[winner]++;
+
+ document.getElementById('status').innerText=
+ players[winner].name+' wins the trick!';
+
+ trick=[];
+
+ setTimeout(()=>{
+
+  document.getElementById('trick').innerHTML='';
+
+  if(myHand.length===0){
+   finishRound();
+   return;
+  }
+
+  turn=winner;
+
+  if(turn===0){
+   document.getElementById('status').innerText='Your turn! Play a card.';
+  }else{
+   computerTurn();
+  }
+
+ },900);
+
 }
-function endRound(){
+
+function finishRound(){
+
+ roundOver=true;
+
  for(let i=0;i<4;i++){
- scores[i]+=tricks[i]>=bids[i]?bids[i]+(tricks[i]-bids[i])*.1:-bids[i];
+
+  if(tricks[i]>=bids[i]){
+   scores[i]+=bids[i]+(tricks[i]-bids[i])*0.1;
+  }else{
+   scores[i]-=bids[i];
+  }
+
  }
- document.getElementById('status').textContent=
- 'Round '+round+' सकियो। तपाईंका Tricks: '+tricks[0]+' / Bid: '+bids[0];
- if(round<5){
- round++;
- document.getElementById('round').textContent=round;
- setTimeout(startGame,1800);
- }else{
- document.getElementById('message').textContent='GAME OVER';
- document.getElementById('status').textContent='तपाईंको अन्तिम Score: '+scores[0].toFixed(1);
- started=false;
+
+ let names=['YOU','PLAYER 1','PLAYER 2','PLAYER 3'];
+
+ let html='';
+
+ for(let i=0;i<4;i++){
+  html+=`<div class="score-row">
+  <span>${names[i]}</span>
+  <b>${tricks[i]} tricks | ${scores[i].toFixed(1)}</b>
+  </div>`;
  }
+
+ document.getElementById('resultText').innerHTML=html;
+
+ document.getElementById('resultPanel').style.display='flex';
+
 }
+
+function nextRound(){
+
+ document.getElementById('resultPanel').style.display='none';
+
+ if(round>=5){
+
+  document.getElementById('resultText').innerHTML='🏆 GAME FINISHED!';
+  document.getElementById('resultPanel').style.display='flex';
+
+  document.querySelector('#resultPanel button').innerText='NEW GAME';
+  document.querySelector('#resultPanel button').onclick=newGame;
+
+  return;
+ }
+
+ round++;
+ startRound();
+
+}
+
+function showScore(){
+
+ let names=['YOU','PLAYER 1','PLAYER 2','PLAYER 3'];
+
+ document.getElementById('roundTitle').innerText=
+ 'ROUND '+round+' / 5';
+
+ let html='';
+
+ names.forEach((n,i)=>{
+  html+=`<div class="score-row">
+  <span>${n}</span>
+  <b>${scores[i].toFixed(1)}</b>
+  </div>`;
+ });
+
+ document.getElementById('scoreRows').innerHTML=html;
+
+ document.getElementById('scorePanel').style.display='flex';
+
+}
+
+function closeScore(){
+ document.getElementById('scorePanel').style.display='none';
+}
+
+newGame();
+
 </script>
+
 </body>
 </html>
