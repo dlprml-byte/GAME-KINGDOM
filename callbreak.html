@@ -219,19 +219,30 @@ function sortHand(h){
 function newGame(){
  let deck=shuffle(makeDeck());
  hands=[[],[],[],[]];
+
  for(let i=0;i<52;i++)hands[i%4].push(deck[i]);
  hands.forEach(sortHand);
 
- bids=[0,0,0,0];tricks=[0,0,0,0];
- trick=[];current=0;started=false;playing=false;busy=false;
+ bids=[0,0,0,0];
+ tricks=[0,0,0,0];
+ trick=[];
+ current=0;
+ started=false;
+ playing=false;
+ busy=false;
 
  document.getElementById("bidPanel").style.display="flex";
+
  let sel=document.getElementById("bid");
  sel.innerHTML="";
- for(let i=1;i<=13;i++)sel.innerHTML+=`<option>${i}</option>`;
+
+ for(let i=1;i<=13;i++){
+  sel.innerHTML+=`<option>${i}</option>`;
+ }
 
  document.getElementById("message").innerText="Choose your call!";
  document.getElementById("status").innerText="13 cards dealt to each player.";
+
  render();
  renderTrick();
  updateInfo();
@@ -239,18 +250,28 @@ function newGame(){
 
 function startRound(){
  if(started)return;
+
  bids[0]=Number(document.getElementById("bid").value);
- bids[1]=3;bids[2]=3;bids[3]=3;
- started=true;playing=true;current=0;
+ bids[1]=3;
+ bids[2]=3;
+ bids[3]=3;
+
+ started=true;
+ playing=true;
+ current=0;
+
  document.getElementById("bidPanel").style.display="none";
  document.getElementById("message").innerText="Your call: "+bids[0];
+
  render();
 }
 
 function legalCards(p){
  if(!trick.length)return hands[p];
+
  let lead=trick[0].card.s;
  let follow=hands[p].filter(c=>c.s===lead);
+
  return follow.length?follow:hands[p];
 }
 
@@ -260,113 +281,153 @@ function playCard(p,c){
 
  hands[p].splice(hands[p].indexOf(c),1);
  trick.push({p,card:c});
+
  playSound();
- renderTrick();render();
+ renderTrick();
+ render();
 
  if(trick.length===4){
-  playing=false;busy=true;
+  playing=false;
+  busy=true;
   setTimeout(resolveTrick,900);
  }else{
   current=(current+1)%4;
   updateInfo();
+
   if(current!==0)setTimeout(computerPlay,650);
  }
 }
 
 function computerPlay(){
  if(!playing||current===0||busy)return;
+
  let cards=legalCards(current);
  let chosen=cards[0];
 
  if(trick.length){
   let winner=getWinner(trick);
+
   let winning=cards.filter(c=>
    (c.s===winner.card.s&&c.v>winner.card.v)||
    (c.s==="♠"&&winner.card.s!=="♠")
   );
+
   if(winning.length)chosen=winning[0];
  }else{
   let spades=cards.filter(c=>c.s==="♠");
   if(spades.length)chosen=spades[spades.length-1];
  }
+
  playCard(current,chosen);
 }
 
 function getWinner(t){
  let winner=t[0],lead=t[0].card.s;
+
  for(let x of t){
   let a=x.card,b=winner.card;
+
   if((a.s==="♠"&&b.s!=="♠")||
    (a.s===b.s&&a.v>b.v)||
    (a.s===lead&&b.s!==lead&&b.s!=="♠")){
    winner=x;
   }
  }
+
  return winner;
 }
 
 function render(){
  let box=document.getElementById("hand");
  box.innerHTML="";
+
  let legal=playing&&current===0?legalCards(0):[];
 
  hands[0].forEach(c=>{
   let b=document.createElement("button");
+
   b.className="card "+(c.red?"red ":"")+(legal.includes(c)?"playable":"");
   b.innerHTML=`<span>${c.n}</span><span>${c.s}</span>`;
   b.disabled=!legal.includes(c);
   b.onclick=()=>playCard(0,c);
+
   box.appendChild(b);
  });
 
  for(let i=0;i<4;i++){
-  document.getElementById("seat"+i).classList.toggle("active",playing&&current===i);
+  document.getElementById("seat"+i).classList.toggle(
+   "active",playing&&current===i
+  );
  }
- updateScores();updateInfo();
+
+ updateScores();
+ updateInfo();
 }
 
 function renderTrick(){
  let box=document.getElementById("trick");
  box.innerHTML="";
+
  trick.forEach(x=>{
   let d=document.createElement("div");
+
   d.className="played "+(x.card.red?"red":"");
   d.innerHTML=`<small>${["YOU","CPU 1","CPU 2","CPU 3"][x.p]}</small><span>${x.card.n}${x.card.s}</span>`;
+
   box.appendChild(d);
  });
 }
 
 function resolveTrick(){
  let winner=getWinner(trick);
+
  tricks[winner.p]++;
  current=winner.p;
+
  document.getElementById("message").innerText=
  ["You","Computer 1","Computer 2","Computer 3"][winner.p]+" won!";
- trick=[];renderTrick();updateInfo();
 
- if(hands.every(h=>!h.length)){finishRound();return;}
- playing=true;busy=false;render();
+ trick=[];
+ renderTrick();
+ updateInfo();
+
+ if(hands.every(h=>!h.length)){
+  finishRound();
+  return;
+ }
+
+ playing=true;
+ busy=false;
+ render();
+
  if(current!==0)setTimeout(computerPlay,700);
 }
 
 function finishRound(){
- playing=false;busy=false;
+ playing=false;
+ busy=false;
+
  for(let i=0;i<4;i++){
   scores[i]+=tricks[i]>=bids[i]
    ?bids[i]+(tricks[i]-bids[i])*0.1
    :-bids[i];
  }
+
  document.getElementById("message").innerText="🏆 ROUND COMPLETE!";
+
  document.getElementById("status").innerText=
  "Your tricks: "+tricks[0]+" | Your call: "+bids[0];
+
  round++;
  document.getElementById("round").innerText="ROUND "+round;
+
  updateScores();
 }
 
 function updateScores(){
- for(let i=0;i<4;i++)
- document.getElementById("s"+i).innerText=scores[i].toFixed(1);
+ for(let i=0;i<4;i++){
+  document.getElementById("s"+i).innerText=scores[i].toFixed(1);
+ }
 }
 
 function updateInfo(){
@@ -378,26 +439,44 @@ function updateInfo(){
 
 function playSound(){
  if(!sound)return;
+
  try{
   let ctx=new(window.AudioContext||window.webkitAudioContext)();
-  let osc=ctx.createOscillator(),gain=ctx.createGain();
-  osc.frequency.value=550;gain.gain.value=.04;
-  osc.connect(gain);gain.connect(ctx.destination);
-  osc.start();osc.stop(ctx.currentTime+.07);
+  let osc=ctx.createOscillator();
+  let gain=ctx.createGain();
+
+  osc.frequency.value=550;
+  gain.gain.value=.04;
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime+.07);
  }catch(e){}
 }
 
 function toggleSound(){
  sound=!sound;
+
  document.getElementById("soundBtn").innerText=
  sound?"🔊 SOUND ON":"🔇 SOUND OFF";
 }
 
 function showRules(){
- alert("CALL BREAK RULES\n\n1. Four players, 52 cards.\n2. Each gets 13 cards.\n3. Spades are Trump.\n4. Follow suit if possible.\n5. Highest card wins, or highest Spade.\n6. Complete your call to score.");
+ alert(
+  "CALL BREAK RULES\n\n"+
+  "1. Four players, 52 cards.\n"+
+  "2. Each gets 13 cards.\n"+
+  "3. Spades are Trump.\n"+
+  "4. Follow suit if possible.\n"+
+  "5. Highest card wins, or highest Spade.\n"+
+  "6. Complete your call to score."
+ );
 }
 
 newGame();
 </script>
+
 </body>
 </html>
